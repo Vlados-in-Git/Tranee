@@ -1,0 +1,15 @@
+
+
+in " current schema " there are current schema of training
+
+schema contains units
+
+unit  - exact trainging on day, wich include 
+one or more training on group of muscle:
+
+// example: unit 1: monday, chest and bicheps
+			unit 2: saturday, triceps and legs
+
+
+
+

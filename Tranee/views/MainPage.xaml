@@ -11,7 +11,9 @@
             <Label Text="Todays training UI" 
                    Margin="0,30,0,0"
                    HorizontalOptions="Center"/>
+            
             <Label Text="data/time" />
+            
             <Button Text="Add trainig" />
 
 
@@ -28,11 +30,13 @@
                         Grid.Row="1"/>
                 
             </Grid>
-                     
-              
-                  
 
-            
+
+            <Button Text="current schema" />
+
+
+
+
 
 
         </VerticalStackLayout>
