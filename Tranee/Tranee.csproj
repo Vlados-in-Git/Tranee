@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
@@ -67,6 +67,12 @@
 	<ItemGroup>
 	  <Folder Include="models\" />
 	  <Folder Include="servises\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="views\CurrentSchemaPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

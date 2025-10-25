@@ -32,7 +32,9 @@
             </Grid>
 
 
-            <Button Text="current schema" />
+            <Button Text="current schema" 
+                    
+                    />
 
 
 
