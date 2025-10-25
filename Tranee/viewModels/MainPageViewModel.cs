@@ -14,5 +14,6 @@ namespace Tranee.viewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        
     }
 }

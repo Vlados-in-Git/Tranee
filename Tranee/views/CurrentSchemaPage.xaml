@@ -3,12 +3,12 @@
              x:Class="Tranee.views.CurrentSchemaPage"
             >
 
-    <HorizontalStackLayout Margin="0,10,40,0" >
+    <VerticalStackLayout Margin="0,10,40,0" >
 
         <Label Text="some of info" />
         <Button Text="Some of Button" />
 
-    </HorizontalStackLayout>
+    </VerticalStackLayout>
     
     
 </ContentPage>

@@ -33,8 +33,9 @@
 
 
             <Button Text="current schema" 
+                   Clicked="OpenCurrentSchemaPage"
                     
-                    />
+             />
 
 
 
