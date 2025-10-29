@@ -33,7 +33,7 @@
 
 
             <Button Text="current schema" 
-                   Clicked="OpenCurrentSchemaPage"
+                   Command="{Binding OpenCurrentSchemaPage}"
                     
              />
 
