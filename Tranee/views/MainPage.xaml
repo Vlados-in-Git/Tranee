@@ -20,12 +20,14 @@
             <Grid ColumnDefinitions="*,*"
                   ColumnSpacing="15">
 
-                <Button Text="New schema" 
+                <Button Text="New schema"
+                        Command="{Binding OpenNewSchemaPage}"
                  Grid.Column="0"
                         Grid.Row="0"/>
                 
                 
                 <Button Text="Annalize"
+                        Command="{Binding OpenAnalizePage}"
                  Grid.Column="1"
                         Grid.Row="1"/>
                 

@@ -21,21 +21,39 @@ namespace Tranee.viewModels
 
         private readonly NavigationService _service;
 
-        public ICommand OpenCurrentSchemaPage { get; } // public щоб binding у view міг знайти команду
+       
         public MainPageViewModel(NavigationService service)
         {
             _service = service;
 
             OpenCurrentSchemaPage = new Command(async () => await NavigateToCurrentSchemaPage());
 
+            OpenNewSchemaPage = new Command(async () => await NavigateToNewSchemaPage());
+
+            OpenAnalizePage = new Command(async () => await NavigateToAnalizePage());
+
         }
 
-       private async Task NavigateToCurrentSchemaPage()
+
+        public ICommand OpenAnalizePage { get; }
+
+        private async Task NavigateToAnalizePage()
+        {
+            await _service.NavigateTo(new AnalizePage());
+        }
+        public ICommand OpenCurrentSchemaPage { get; } // public щоб binding у view міг знайти команду
+
+        private async Task NavigateToCurrentSchemaPage()
         {
             await _service.NavigateTo(new CurrentSchemaPage());
         }
 
+        public ICommand OpenNewSchemaPage { get; }
 
+        private async Task NavigateToNewSchemaPage()
+        {
+            await _service.NavigateTo(new NewSchemaPage());
+        }
 
 
 
