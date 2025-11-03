@@ -14,7 +14,8 @@
             
             <Label Text="data/time" />
             
-            <Button Text="Add trainig" />
+            <Button Text="Add trainig"
+                    Command="{Binding OpenAddTrainingPage}"/>
 
 
             <Grid ColumnDefinitions="*,*"

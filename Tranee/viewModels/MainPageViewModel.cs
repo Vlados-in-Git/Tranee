@@ -32,9 +32,15 @@ namespace Tranee.viewModels
 
             OpenAnalizePage = new Command(async () => await NavigateToAnalizePage());
 
+            OpenAddTrainingPage = new Command(async () => await NavigateToAddTrainingPage());            
         }
 
+        public ICommand OpenAddTrainingPage { get; }
 
+        private async Task NavigateToAddTrainingPage()
+        {
+            await _service.NavigateTo(new AddTrainPage() );
+        }
         public ICommand OpenAnalizePage { get; }
 
         private async Task NavigateToAnalizePage()
