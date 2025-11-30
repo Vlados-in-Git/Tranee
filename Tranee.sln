@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tranee", "Tranee\Tranee.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraineeAPI", "TraineeAPI\TraineeAPI.csproj", "{29D816DA-7A5C-4317-A4E8-A944CEE497E0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraneeLibrary", "TraneeLibrary\TraneeLibrary.csproj", "{6ADA6F88-6BDB-44C5-9B6D-EA8FF0E4FD6E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{29D816DA-7A5C-4317-A4E8-A944CEE497E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29D816DA-7A5C-4317-A4E8-A944CEE497E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29D816DA-7A5C-4317-A4E8-A944CEE497E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6ADA6F88-6BDB-44C5-9B6D-EA8FF0E4FD6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ADA6F88-6BDB-44C5-9B6D-EA8FF0E4FD6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ADA6F88-6BDB-44C5-9B6D-EA8FF0E4FD6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ADA6F88-6BDB-44C5-9B6D-EA8FF0E4FD6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
