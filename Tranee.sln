@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36616.10 d17.14
+VisualStudioVersion = 17.14.36616.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tranee", "Tranee\Tranee.csproj", "{51672A26-CAD7-4431-9AEA-6D8A03303DA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraineeAPI", "TraineeAPI\TraineeAPI.csproj", "{29D816DA-7A5C-4317-A4E8-A944CEE497E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{51672A26-CAD7-4431-9AEA-6D8A03303DA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51672A26-CAD7-4431-9AEA-6D8A03303DA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51672A26-CAD7-4431-9AEA-6D8A03303DA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29D816DA-7A5C-4317-A4E8-A944CEE497E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29D816DA-7A5C-4317-A4E8-A944CEE497E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29D816DA-7A5C-4317-A4E8-A944CEE497E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29D816DA-7A5C-4317-A4E8-A944CEE497E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
