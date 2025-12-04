@@ -8,8 +8,9 @@ using System.Text;
 namespace TraneeLibrary
 {
     //class wich discrabe a traning session in general
-    internal class TraningSession
+    public class TraningSession
     {
+        public int Id { get; set; }
         public DateTime Date { get; set; } // date of training
 
         public int Quality { get; set; } // TODO: make a structure( from easy to hard), show how hard train was
@@ -26,20 +27,31 @@ namespace TraneeLibrary
 
     public class Exercise // 
     {
+        public int Id { get; set; }
         public string GroupOfmuscle { get; set; } // name on wich group of muscle train this exercise TODO: make that group of muscle could be several in one record
         public string Name { get; set; } // name of exercise
         public int RestBetweenSets { get; set; } // Time of rest between sets
 
-        List<Set> Exersise { get; set; } = new List<Set>();
+        // make a default weight ( like weight only griph) ?
+
+
+        public int TraningSessionId { get; set; }
+        public TraningSession TraningSession { get; set; } = null!;
+
+
+        public List<Set> Exersise { get; set; } = new List<Set>();
     }
 
     public class Set // TODO: make Inherit from Exercise
     {
-        public int Nuber  { get; set; }// it first or second or ... set
-        public int Weigth  { get; set; }// how match Kg you gain in Set;
+        public int Id { get; set; }
+        public int Number  { get; set; }// it first or second or ... set
+        public int Weight  { get; set; }// how match Kg you gain in Set;
         public int Reps    { get; set; }// how many time you gained weight;
         public int Quality { get; set; }// show how hard train was TODO: Make a Quality as particular structure to use once in several calsess
         public string? Note { get; set; }// A note about this set ( might be null)
+
+        public TraningSession TraningSession { get; set; }
 
     }
 }

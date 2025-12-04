@@ -5,6 +5,8 @@ namespace TraineeAPI
     {
         public static void Main(string[] args)
         {
+            //TODO: make a CloudDBmodel for myqsl database
+
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
