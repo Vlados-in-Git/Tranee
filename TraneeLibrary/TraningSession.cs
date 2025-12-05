@@ -39,7 +39,7 @@ namespace TraneeLibrary
         public TraningSession TraningSession { get; set; } = null!;
 
 
-        public List<Set> Exersise { get; set; } = new List<Set>();
+        public List<Set> Sets { get; set; } = new List<Set>();
     }
 
     public class Set // TODO: make Inherit from Exercise
