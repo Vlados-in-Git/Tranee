@@ -7,12 +7,11 @@
     <VerticalStackLayout Padding="20" Spacing="10">
 
         <Button Text="Додати тестове тренування"
-         Command = "{ binding AddTrainingCommand}"
-          />
+                Command="{Binding AddTrainingCommand}" />
 
         <Label Text="Мої тренування:" FontSize="18" FontAttributes="Bold"/>
 
-        <CollectionView x:Name="WorkoutsList">
+        <CollectionView x:Name="WorkoutsList" ItemsSource="{Binding Sessions}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <VerticalStackLayout Padding="10" BackgroundColor="#f0f0f0" Margin="0,5">

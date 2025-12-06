@@ -1,4 +1,5 @@
 ﻿
+
 using Microsoft.Maui.Controls;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,12 @@ using Tranee.servises;
 using Tranee.views;
 using TraneeLibrary;
 
+using Set = TraneeLibrary.Set;
+
 
 namespace Tranee.viewModels
 {
-    internal class AddTrainingViewModel : INotifyPropertyChanged
+    public class AddTrainingViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private readonly NavigationService _serviceNavigation;
@@ -24,19 +27,21 @@ namespace Tranee.viewModels
 
         public ObservableCollection<TraningSession> Sessions { get; set; } = new ObservableCollection<TraningSession>();
 
+         public ICommand AddTrainingCommand { get; }
+
         public AddTrainingViewModel(TrainingService service)
         {
             //   _serviceNavigation = service;
             _serviceTraining = service;
 
             AddTrainingCommand = new Command(async () => await AddTraining());
-            LoadDataCommand = new Command(async () => await LoadData());
+            //LoadDataCommand = new Command(async () => await LoadData());
 
             Task.Run(LoadData);
         }
 
-        public ICommand LoadData { get; }
-        public ICommand AddTraining { get; }
+     //   public ICommand LoadData { get; }
+       
 
         private async Task LoadData()
         {
@@ -55,13 +60,50 @@ namespace Tranee.viewModels
 
         private async Task AddTraining()
         {
-            var newTraining = new TraningSession()
+
+            // Create a realistic training session with multiple exercises and sets.
+            var session = new TraningSession()
             {
                 Date = DateTime.Now,
-                Quality = 10,
-                Exercises = new List<Exercise> { new Exercise { Name = "Squat MVVM" } }
+                Quality = 8,
+                RestBetweenExercise = 90,
+                Exercises = new List<Exercise>()
             };
-            await _serviceTraining.AddSessionAsync(newTraining);
+
+            // Squat exercise with three sets
+            var squat = new Exercise
+            {
+                Name = "Barbell Back Squat",
+                GroupOfmuscle = "Legs",
+                RestBetweenSets = 120,
+                TraningSession = session,
+                Sets = new List<Set>
+                {
+                    new Set { Number = 1, Weight = 60, Reps = 8, Quality = 6, Note = "Warmup", TraningSession = session },
+                    new Set { Number = 2, Weight = 90, Reps = 5, Quality = 8, Note = null, TraningSession = session },
+                    new Set { Number = 3, Weight = 95, Reps = 5, Quality = 8, Note = "Good depth", TraningSession = session }
+                }
+            };
+
+        // Bench press exercise with three sets
+        var bench = new Exercise
+        {
+            Name = "Barbell Bench Press",
+            GroupOfmuscle = "Chest",
+            RestBetweenSets = 90,
+            TraningSession = session,
+            Sets = new List<Set>
+                {
+                    new Set { Number = 1, Weight = 40, Reps = 8, Quality = 6, Note = "Warmup", TraningSession = session },
+                    new Set { Number = 2, Weight = 60, Reps = 6, Quality = 7, Note = null, TraningSession = session },
+                    new Set { Number = 3, Weight = 65, Reps = 5, Quality = 8, Note = "Controlled", TraningSession = session }
+                }
+        };
+
+            session.Exercises.Add(squat);
+            session.Exercises.Add(bench);
+
+        await _serviceTraining.AddSessionAsync(session);
             await LoadData();
         }
     }
