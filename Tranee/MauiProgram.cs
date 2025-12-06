@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using Tranee.Data;
+using Tranee.servises;
+using Tranee.views;
 
 namespace Tranee
 {
@@ -15,7 +18,12 @@ namespace Tranee
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.Services.AddDbContext<LocalDBContext>();
 
+            builder.Services.AddTransient<TrainingService>();
+
+            builder.Services.AddTransient<MainPage>();
+            builder.Services.AddTransient<AddTrainPage>();
 
 #if DEBUG
     		builder.Logging.AddDebug();

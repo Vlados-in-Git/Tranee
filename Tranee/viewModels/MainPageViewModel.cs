@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Microsoft.Maui.Controls;
 
 using System.Runtime.CompilerServices;
-using System.ComponentModel;
 using System.Windows.Input;
 using Tranee.servises;
 using Tranee.views;
@@ -59,6 +58,7 @@ namespace Tranee.viewModels
         private async Task NavigateToNewSchemaPage()
         {
             await _service.NavigateTo(new NewSchemaPage());
+
         }
 
 
