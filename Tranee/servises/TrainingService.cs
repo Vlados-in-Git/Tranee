@@ -25,5 +25,17 @@ namespace Tranee.servises
                 .ThenInclude(e => e.Sets)
                 .ToListAsync();
         }
+
+        public async Task AddSessionAsync(TraningSession session)
+        {
+           await _context.Sessions.AddAsync(session);
+           await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteSessionAsync(TraningSession session)
+        {
+            _context.Sessions.Remove(session);
+            await _context.SaveChangesAsync();
+        }
     }
 }
