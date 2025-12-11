@@ -11,7 +11,7 @@ namespace Tranee.servises
 {
     public class NavigationService
     {
-      //  private readonly INavigation _navigation;
+    
 
         private readonly IServiceProvider _serviceProvider;
         public NavigationService(IServiceProvider serviceProvider)
@@ -29,6 +29,8 @@ namespace Tranee.servises
             // 3. Переходимо
             await navigation.PushAsync(page);
         }
+
+
 
        /* public NavigationService(INavigation navigation)
         {

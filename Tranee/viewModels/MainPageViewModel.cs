@@ -76,7 +76,7 @@ namespace Tranee.viewModels
         private async Task NavigateToAddTrainingPage()
         {
             // БУЛО: await _service.NavigateTo(new AddTrainPage());
-            // СТАЛО:
+         
             await _service.NavigateTo<AddTrainPage>();
         }
 

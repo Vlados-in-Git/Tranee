@@ -10,6 +10,8 @@ namespace TraneeLibrary
     //class wich discrabe a traning session in general
     public class TraningSession
     {
+
+        // TODO: To relate a traningSession with TrainingTemplate
         public int Id { get; set; }
         public DateTime Date { get; set; } // date of training
 
@@ -28,8 +30,8 @@ namespace TraneeLibrary
     public class Exercise // 
     {
         public int Id { get; set; }
-        public string GroupOfmuscle { get; set; } // name on wich group of muscle train this exercise TODO: make that group of muscle could be several in one record
         public string Name { get; set; } // name of exercise
+        public string GroupOfMuscle { get; set; } // name on wich group of muscle train this exercise TODO: make that group of muscle could be several in one record
         public int RestBetweenSets { get; set; } // Time of rest between sets
 
         // make a default weight ( like weight only griph) ?

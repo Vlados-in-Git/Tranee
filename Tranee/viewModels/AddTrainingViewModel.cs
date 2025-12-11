@@ -74,7 +74,7 @@ namespace Tranee.viewModels
             var squat = new Exercise
             {
                 Name = "Barbell Back Squat",
-                GroupOfmuscle = "Legs",
+                GroupOfMuscle = "Legs",
                 RestBetweenSets = 120,
                 TraningSession = session,
                 Sets = new List<Set>
@@ -89,7 +89,7 @@ namespace Tranee.viewModels
         var bench = new Exercise
         {
             Name = "Barbell Bench Press",
-            GroupOfmuscle = "Chest",
+            GroupOfMuscle = "Chest",
             RestBetweenSets = 90,
             TraningSession = session,
             Sets = new List<Set>

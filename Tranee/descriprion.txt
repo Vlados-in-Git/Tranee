@@ -1,3 +1,4 @@
+TODO: Make a traning Schema page 
 
 
 in " current schema " there are current schema of training

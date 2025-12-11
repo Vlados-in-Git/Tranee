@@ -7,6 +7,7 @@
             InitializeComponent();
 
             // Resolve MainPage from DI (injected), host it in a NavigationPage so navigation works
+
             MainPage = new NavigationPage(mainPage);
 
         }
