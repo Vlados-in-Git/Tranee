@@ -4,10 +4,23 @@
              x:Class="Tranee.views.AddTrainPage"
              Title="AddTrainPage">
 
-    <VerticalStackLayout Margin="0,10,40,0" >
+    <VerticalStackLayout Padding="20" Spacing="10">
 
-        <Label Text="some of info" />
-        <Button Text="Some of Button" />
+        <Button Text="Додати тестове тренування"
+                Command="{Binding AddTrainingCommand}" />
+
+        <Label Text="Мої тренування:" FontSize="18" FontAttributes="Bold"/>
+
+        <CollectionView x:Name="WorkoutsList" ItemsSource="{Binding Sessions}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <VerticalStackLayout Padding="10" BackgroundColor="#f0f0f0" Margin="0,5">
+                        <Label Text="{Binding Date}" FontAttributes="Bold"/>
+                        <Label Text="{Binding Quality, StringFormat='Якість: {0}'}"/>
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
     </VerticalStackLayout>
 
