@@ -5,10 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using TraneeLibrary;
 using Microsoft.EntityFrameworkCore;
-using SQLite;
 using System.IO;
 
-namespace Tranee.Data
+namespace TraneeLibrary.Data
 {
     public class LocalDBContext : DbContext
     {
@@ -30,13 +29,7 @@ namespace Tranee.Data
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<Set> Sets { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            string path = Path.Combine(FileSystem.AppDataDirectory, "TraneeLocal.db");
-
-            optionsBuilder.UseSqlite($"Filename = {path}");
-            base.OnConfiguring(optionsBuilder);
-        }
+     
 
         
     }

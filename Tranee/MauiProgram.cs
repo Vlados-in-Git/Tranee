@@ -1,8 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
-using Tranee.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Tranee.servises;
 using Tranee.viewModels;
 using Tranee.views;
+using TraneeLibrary.Data;
 
 namespace Tranee
 {
@@ -20,8 +21,15 @@ namespace Tranee
                 });
 
 
+            // "TraneeLocal.db"
 
-            builder.Services.AddDbContext<LocalDBContext>();
+            string dbPath = Path.Combine(FileSystem.AppDataDirectory, "TraneeLocal.db");
+
+            builder.Services.AddDbContext<LocalDBContext>(options =>
+            {
+                options.UseSqlite($"Data Source={dbPath}");
+                // Тут НЕ треба вказувати MigrationsAssembly, бо бібліотека підключена напряму
+            });
 
             // Services and viewmodels/pages
             builder.Services.AddTransient<TrainingService>();

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TraneeLibrary;
 using Microsoft.EntityFrameworkCore;
-using Tranee.Data;
+using TraneeLibrary.Data;
 
 namespace Tranee.servises
 {
