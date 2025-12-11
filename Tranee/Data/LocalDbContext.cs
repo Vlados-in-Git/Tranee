@@ -17,6 +17,15 @@ namespace Tranee.Data
             Database.EnsureCreated();
         }
 
+        public LocalDBContext(DbContextOptions<LocalDBContext> options)
+           : base(options)
+        {
+            Database.EnsureCreated();
+        }
+
+
+        public DbSet<TrainingTemplate> TrainingTemplates { get; set; }
+        public DbSet<ExerciseTemplate> ExerciseTemplates { get; set; }
         public DbSet<TraningSession> Sessions { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<Set> Sets { get; set; }
