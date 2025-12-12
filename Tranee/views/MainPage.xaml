@@ -14,31 +14,25 @@
             
             <Label Text="data/time" />
             
-            <Button Text="Add trainig"
+            <Button Text="History"
                     Command="{Binding OpenAddTrainingPage}"/>
 
 
-            <Grid ColumnDefinitions="*,*"
-                  ColumnSpacing="15">
 
-                <Button Text="New schema"
-                        Command="{Binding OpenNewSchemaPage}"
-                 Grid.Column="0"
-                        Grid.Row="0"/>
-                
-                
-                <Button Text="Annalize"
+
+            <Button Text="Templates" 
+                   Command="{Binding OpenCurrentSchemaPage}"
+                    
+             />
+
+
+            <Button Text="Annalize"
                         Command="{Binding OpenAnalizePage}"
                  Grid.Column="1"
                         Grid.Row="1"/>
                 
-            </Grid>
+        
 
-
-            <Button Text="current schema" 
-                   Command="{Binding OpenCurrentSchemaPage}"
-                    
-             />
 
 
 
