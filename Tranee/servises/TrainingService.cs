@@ -19,6 +19,13 @@ namespace Tranee.servises
         }
 
 
+        public async Task FinishSessionAsync(TraningSession session)
+        {
+            _context.Sessions.Update(session);
+
+            await _context.SaveChangesAsync();
+
+        }
     
         public async Task<TraningSession> GetSessionByIdAsync(int id)
         {
