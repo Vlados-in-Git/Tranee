@@ -15,6 +15,8 @@ namespace TraneeLibrary
         public int Id { get; set; }
         public DateTime Date { get; set; } // date of training
 
+        public int? TrainingTemplateId { get; set; }
+
         public int Quality { get; set; } // TODO: make a structure( from easy to hard), show how hard train was
 
         public int RestBetweenExercise { get; set; }
@@ -53,7 +55,8 @@ namespace TraneeLibrary
         public int Quality { get; set; }// show how hard train was TODO: Make a Quality as particular structure to use once in several calsess
         public string? Note { get; set; }// A note about this set ( might be null)
 
-        public TraningSession TraningSession { get; set; }
+        public int ExerciseId { get; set; }
+        public Exercise Exercise { get; set; } = null!;
 
     }
 }

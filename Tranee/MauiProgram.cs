@@ -23,6 +23,7 @@ namespace Tranee
 
             // "TraneeLocal.db"
 
+
             string dbPath = Path.Combine(FileSystem.AppDataDirectory, "TraneeLocal.db");
 
             builder.Services.AddDbContext<LocalDBContext>(options =>
@@ -36,12 +37,19 @@ namespace Tranee
             builder.Services.AddTransient<AddTrainingViewModel>();
             builder.Services.AddTransient<AddTrainPage>();
 
+            builder.Services.AddTransient<ActiveTraningPage>();
+            builder.Services.AddTransient<ActiveTraningViewModel>();
+
+            builder.Services.AddTransient<SchemaService>();
+            builder.Services.AddTransient<AddNewSchemaViewModel>();
+            builder.Services.AddTransient<CurrentSchemaPage>();
+
             // Register navigation service, main VM and main page so DI can wire bindings/navigation
             builder.Services.AddSingleton<NavigationService>();
             builder.Services.AddTransient<MainPageViewModel>();
             builder.Services.AddTransient<MainPage>();
 
-            builder.Services.AddTransient<NewSchemaPage>();
+            
             builder.Services.AddTransient<CurrentSchemaPage>();
             builder.Services.AddTransient<AnalizePage>();
 
@@ -51,7 +59,34 @@ namespace Tranee
             builder.Logging.AddDebug();
 #endif
 
-            return builder.Build();
+            var app = builder.Build();
+
+            InitializeDatabase(app);
+
+            return app;
+        }
+
+        private static void InitializeDatabase(MauiApp app)
+        {
+            // Створюємо тимчасову область (Scope), щоб дістати DbContext
+            using (var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<LocalDBContext>();
+
+                try
+                {
+                     db.Database.EnsureDeleted();
+
+                    db.Database.Migrate();
+                }
+                catch (Exception ex)
+                {
+                    // Логування помилки, якщо щось піде не так
+                    Console.WriteLine($"Database migration failed: {ex.Message}");
+                    // Можна додати Debug.WriteLine або App.MainPage.DisplayAlert...
+                }
+            }
+
         }
     }
 }

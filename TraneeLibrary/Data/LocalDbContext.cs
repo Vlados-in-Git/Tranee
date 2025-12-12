@@ -16,13 +16,13 @@ namespace TraneeLibrary.Data
 
         public LocalDBContext()
         {
-            Database.EnsureCreated();
+           // Database.EnsureCreated();
         }
 
         public LocalDBContext(DbContextOptions<LocalDBContext> options)
            : base(options)
         {
-            Database.EnsureCreated();
+          //  Database.EnsureCreated();
         }
 
 

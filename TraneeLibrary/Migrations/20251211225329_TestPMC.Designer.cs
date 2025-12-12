@@ -79,7 +79,7 @@ namespace TraneeLibrary.Migrations
                     b.Property<int>("RestBetweenSets")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("TargertSets")
+                    b.Property<int>("TargetSets")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("TargetReps")

@@ -18,6 +18,15 @@ namespace Tranee.servises
             _context = context;
         }
 
+
+    
+        public async Task<TraningSession> GetSessionByIdAsync(int id)
+        {
+            return  _context.Sessions
+                            .Include(e => e.Exercises)
+                            .ThenInclude(s => s.Sets)
+                            .FirstOrDefault(e => e.Id == id);
+        }
         public async Task<List<TraningSession>> GetAllSessionAsync()
         {
             return await _context.Sessions

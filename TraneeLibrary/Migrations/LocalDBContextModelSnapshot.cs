@@ -17,21 +17,6 @@ namespace TraneeLibrary.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.11");
 
-            modelBuilder.Entity("ExerciseTemplateTrainingTemplate", b =>
-                {
-                    b.Property<int>("ExerciseTemplatesId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("TrainingTemplateId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("ExerciseTemplatesId", "TrainingTemplateId");
-
-                    b.HasIndex("TrainingTemplateId");
-
-                    b.ToTable("ExerciseTemplateTrainingTemplate");
-                });
-
             modelBuilder.Entity("TraneeLibrary.Exercise", b =>
                 {
                     b.Property<int>("Id")
@@ -76,16 +61,18 @@ namespace TraneeLibrary.Migrations
                     b.Property<int>("RestBetweenSets")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("TargertSets")
+                    b.Property<int>("TargetReps")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("TargetReps")
+                    b.Property<int>("TargetSets")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("TrainingTemplateId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TrainingTemplateId");
 
                     b.ToTable("ExerciseTemplates");
                 });
@@ -96,7 +83,7 @@ namespace TraneeLibrary.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ExerciseId")
+                    b.Property<int>("ExerciseId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Note")
@@ -111,17 +98,12 @@ namespace TraneeLibrary.Migrations
                     b.Property<int>("Reps")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("TraningSessionId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("Weight")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ExerciseId");
-
-                    b.HasIndex("TraningSessionId");
 
                     b.ToTable("Sets");
                 });
@@ -162,24 +144,12 @@ namespace TraneeLibrary.Migrations
                     b.Property<int>("RestBetweenExercise")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("TrainingTemplateId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.ToTable("Sessions");
-                });
-
-            modelBuilder.Entity("ExerciseTemplateTrainingTemplate", b =>
-                {
-                    b.HasOne("TraneeLibrary.ExerciseTemplate", null)
-                        .WithMany()
-                        .HasForeignKey("ExerciseTemplatesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TraneeLibrary.TrainingTemplate", null)
-                        .WithMany()
-                        .HasForeignKey("TrainingTemplateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("TraneeLibrary.Exercise", b =>
@@ -193,24 +163,36 @@ namespace TraneeLibrary.Migrations
                     b.Navigation("TraningSession");
                 });
 
-            modelBuilder.Entity("TraneeLibrary.Set", b =>
+            modelBuilder.Entity("TraneeLibrary.ExerciseTemplate", b =>
                 {
-                    b.HasOne("TraneeLibrary.Exercise", null)
-                        .WithMany("Sets")
-                        .HasForeignKey("ExerciseId");
-
-                    b.HasOne("TraneeLibrary.TraningSession", "TraningSession")
-                        .WithMany()
-                        .HasForeignKey("TraningSessionId")
+                    b.HasOne("TraneeLibrary.TrainingTemplate", "TrainingTemplate")
+                        .WithMany("ExerciseTemplates")
+                        .HasForeignKey("TrainingTemplateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("TraningSession");
+                    b.Navigation("TrainingTemplate");
+                });
+
+            modelBuilder.Entity("TraneeLibrary.Set", b =>
+                {
+                    b.HasOne("TraneeLibrary.Exercise", "Exercise")
+                        .WithMany("Sets")
+                        .HasForeignKey("ExerciseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Exercise");
                 });
 
             modelBuilder.Entity("TraneeLibrary.Exercise", b =>
                 {
                     b.Navigation("Sets");
+                });
+
+            modelBuilder.Entity("TraneeLibrary.TrainingTemplate", b =>
+                {
+                    b.Navigation("ExerciseTemplates");
                 });
 
             modelBuilder.Entity("TraneeLibrary.TraningSession", b =>

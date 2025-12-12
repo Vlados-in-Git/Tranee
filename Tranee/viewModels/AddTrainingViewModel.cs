@@ -22,7 +22,6 @@ namespace Tranee.viewModels
     public class AddTrainingViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private readonly NavigationService _serviceNavigation;
         private readonly TrainingService _serviceTraining;
 
         public ObservableCollection<TraningSession> Sessions { get; set; } = new ObservableCollection<TraningSession>();
@@ -31,7 +30,7 @@ namespace Tranee.viewModels
 
         public AddTrainingViewModel(TrainingService service)
         {
-            //   _serviceNavigation = service;
+           
             _serviceTraining = service;
 
             AddTrainingCommand = new Command(async () => await AddTraining());
@@ -79,9 +78,9 @@ namespace Tranee.viewModels
                 TraningSession = session,
                 Sets = new List<Set>
                 {
-                    new Set { Number = 1, Weight = 60, Reps = 8, Quality = 6, Note = "Warmup", TraningSession = session },
-                    new Set { Number = 2, Weight = 90, Reps = 5, Quality = 8, Note = null, TraningSession = session },
-                    new Set { Number = 3, Weight = 95, Reps = 5, Quality = 8, Note = "Good depth", TraningSession = session }
+                    new Set { Number = 1, Weight = 60, Reps = 8, Quality = 6, Note = "Warmup",  },
+                    new Set { Number = 2, Weight = 90, Reps = 5, Quality = 8, Note = null, },
+                    new Set { Number = 3, Weight = 95, Reps = 5, Quality = 8, Note = "Good depth",  }
                 }
             };
 
@@ -94,9 +93,9 @@ namespace Tranee.viewModels
             TraningSession = session,
             Sets = new List<Set>
                 {
-                    new Set { Number = 1, Weight = 40, Reps = 8, Quality = 6, Note = "Warmup", TraningSession = session },
-                    new Set { Number = 2, Weight = 60, Reps = 6, Quality = 7, Note = null, TraningSession = session },
-                    new Set { Number = 3, Weight = 65, Reps = 5, Quality = 8, Note = "Controlled", TraningSession = session }
+                    new Set { Number = 1, Weight = 40, Reps = 8, Quality = 6, Note = "Warmup",  },
+                    new Set { Number = 2, Weight = 60, Reps = 6, Quality = 7, Note = null, },
+                    new Set { Number = 3, Weight = 65, Reps = 5, Quality = 8, Note = "Controlled", }
                 }
         };
 

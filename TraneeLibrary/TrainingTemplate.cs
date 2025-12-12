@@ -24,11 +24,11 @@ namespace TraneeLibrary
         public string GroupOfMuscle { get; set; }
 
         public int RestBetweenSets { get; set; }
-        public int TargertSets { get; set; }
+        public int TargetSets { get; set; }
         public int TargetReps { get; set; }
 
         public int TrainingTemplateId { get; set; }
-        public List<TrainingTemplate> TrainingTemplate { get; set; } = null!;
+        public TrainingTemplate TrainingTemplate { get; set; } = null!;
 
 
     }

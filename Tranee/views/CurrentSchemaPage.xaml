@@ -1,14 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:TraneeLibrary;assembly=TraneeLibrary" 
+             xmlns:vm="clr-namespace:Tranee.viewModels"
              x:Class="Tranee.views.CurrentSchemaPage"
-            >
+             Title="Мої Програми">
+    <Grid RowDefinitions="Auto, Auto, *" Padding="20">
 
-    <VerticalStackLayout Margin="0,10,40,0" >
+        <Button Grid.Row="0" 
+                Text="Додати тестову схему" 
+                Command="{Binding AddTestSchemaCommand}" 
+                Margin="0,0,0,10"/>
 
-        <Label Text="some of info" />
-        <Button Text="Some of Button" />
+        <Label Grid.Row="1" 
+               Text="Обери тренування на сьогодні:" 
+               FontSize="18" 
+               FontAttributes="Bold"
+               Margin="0,0,0,10"/>
 
-    </VerticalStackLayout>
-    
-    
+        <CollectionView Grid.Row="2" 
+                        x:Name="TemplateList" 
+                        ItemsSource="{Binding Templates}"
+                        SelectionMode="None">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:TrainingTemplate">
+                    <Frame Margin="0,5" Padding="15" BorderColor="Gray" CornerRadius="10">
+                        <Grid ColumnDefinitions="*, Auto">
+
+                            <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
+                                <Label Text="{Binding Name}" 
+                                       FontSize="16" 
+                                       FontAttributes="Bold"/>
+                                <Label Text="{Binding Description}" 
+                                       FontSize="12" 
+                                       TextColor="Gray"/>
+                                <Label Text="{Binding ExerciseTemplates.Count, StringFormat='Вправ: {0}'}" 
+                                       FontSize="10"/>
+                            </VerticalStackLayout>
+
+                            <HorizontalStackLayout Grid.Column="1" Spacing="10" VerticalOptions="Center">
+
+
+
+                                <Button 
+                                    Text="Деталі" 
+                                    HeightRequest="40"
+                                    VerticalOptions="Center"
+                                   />
+
+                                <Button
+                                    Text="Почати" 
+                                    HeightRequest="40"
+                                    VerticalOptions="Center"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AddNewSchemaViewModel}}, Path=StartTraningByTemplate}"
+                                    CommandParameter="{Binding .}"/>
+
+
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </Frame>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <CollectionView.EmptyView>
+                <Label Text="Схем поки немає. Створи першу!" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center"/>
+            </CollectionView.EmptyView>
+
+        </CollectionView>
+    </Grid>
 </ContentPage>
