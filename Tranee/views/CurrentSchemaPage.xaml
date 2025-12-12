@@ -39,12 +39,25 @@
                                        FontSize="10"/>
                             </VerticalStackLayout>
 
-                            <Button Grid.Column="1" 
+                            <HorizontalStackLayout Grid.Column="1" Spacing="10" VerticalOptions="Center">
+
+
+
+                                <Button 
+                                    Text="Деталі" 
+                                    HeightRequest="40"
+                                    VerticalOptions="Center"
+                                   />
+
+                                <Button
                                     Text="Почати" 
                                     HeightRequest="40"
                                     VerticalOptions="Center"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AddNewSchemaViewModel}}, Path=StartTraningByTemplate}"
                                     CommandParameter="{Binding .}"/>
+
+
+                            </HorizontalStackLayout>
                         </Grid>
                     </Frame>
 

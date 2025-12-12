@@ -46,7 +46,7 @@ namespace Tranee
             builder.Services.AddTransient<MainPageViewModel>();
             builder.Services.AddTransient<MainPage>();
 
-            builder.Services.AddTransient<NewSchemaPage>();
+            
             builder.Services.AddTransient<CurrentSchemaPage>();
             builder.Services.AddTransient<AnalizePage>();
 
