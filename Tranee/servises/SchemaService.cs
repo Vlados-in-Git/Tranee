@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Tranee.servises
 {
-    internal class SchemaService
+    public class SchemaService
     {
         private readonly LocalDBContext _context;
 

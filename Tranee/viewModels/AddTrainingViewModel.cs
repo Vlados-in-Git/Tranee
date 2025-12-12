@@ -22,7 +22,6 @@ namespace Tranee.viewModels
     public class AddTrainingViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private readonly NavigationService _serviceNavigation;
         private readonly TrainingService _serviceTraining;
 
         public ObservableCollection<TraningSession> Sessions { get; set; } = new ObservableCollection<TraningSession>();
@@ -31,7 +30,7 @@ namespace Tranee.viewModels
 
         public AddTrainingViewModel(TrainingService service)
         {
-            //   _serviceNavigation = service;
+           
             _serviceTraining = service;
 
             AddTrainingCommand = new Command(async () => await AddTraining());
