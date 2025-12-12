@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Microsoft.Maui.Controls;
+using Tranee.viewModels;
+using Tranee.views;
 
 
 namespace Tranee.servises
@@ -30,6 +32,17 @@ namespace Tranee.servises
             await navigation.PushAsync(page);
         }
 
+        public async Task NavigateTo<Tpage>(int parameter) where Tpage : Page
+        {
+            var page = _serviceProvider.GetRequiredService<Tpage>();
+
+            if(page.BindingContext is ActiveTraningViewModel viewModel)
+            {
+                await viewModel.Initialize(parameter);
+            }
+
+            await Application.Current.MainPage.Navigation.PushAsync(page);
+        }
 
 
        /* public NavigationService(INavigation navigation)

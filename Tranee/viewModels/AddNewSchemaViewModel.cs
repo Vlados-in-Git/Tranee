@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Tranee.servises;
+using Tranee.views;
 using TraneeLibrary;
 using static System.Collections.Specialized.BitVector32;
 
@@ -16,17 +18,40 @@ namespace Tranee.viewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private readonly SchemaService _SchemaService;
-
+        private readonly IServiceProvider _serviceProvider;
         public ObservableCollection<TrainingTemplate> Templates { get; set; } = new ObservableCollection<TrainingTemplate>();
 
         public ICommand AddTestSchemaCommand { get; }
-        public AddNewSchemaViewModel(SchemaService service)
+        public AddNewSchemaViewModel(SchemaService service, IServiceProvider serviceProvider )
         {
             _SchemaService = service;
+            _serviceProvider = serviceProvider;
 
             AddTestSchemaCommand = new Command(async () => await AddSchema() );
+            StartTraningByTemplate = new Command<TrainingTemplate>(async (template) => await StartTraning( template ));
 
             Task.Run(LoadData);
+        }
+
+        public Command<TrainingTemplate> StartTraningByTemplate { get; }
+
+        private async Task StartTraning(TrainingTemplate template)
+        {
+            if (template == null) return;
+
+            int newSessionId = await _SchemaService.StartSessionFromTemplateAsync(template.Id);         //create session in DB
+
+            if (newSessionId == -1) return;
+
+            var activePage = _serviceProvider.GetService<ActiveTraningPage>();      //create page
+
+            if (activePage.BindingContext is ActiveTraningViewModel targetViewModel)
+            {
+                await targetViewModel.Initialize(newSessionId); // create data in VM
+            }
+
+            await Application.Current.MainPage.Navigation.PushAsync(activePage); //push page
+
         }
 
         private async Task LoadData()

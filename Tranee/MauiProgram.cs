@@ -37,6 +37,9 @@ namespace Tranee
             builder.Services.AddTransient<AddTrainingViewModel>();
             builder.Services.AddTransient<AddTrainPage>();
 
+            builder.Services.AddTransient<ActiveTraningPage>();
+            builder.Services.AddTransient<ActiveTraningViewModel>();
+
             builder.Services.AddTransient<SchemaService>();
             builder.Services.AddTransient<AddNewSchemaViewModel>();
             builder.Services.AddTransient<CurrentSchemaPage>();

@@ -86,6 +86,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="views\ActiveTraningPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="views\AddTrainPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
