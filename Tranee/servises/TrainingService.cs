@@ -18,6 +18,28 @@ namespace Tranee.servises
             _context = context;
         }
 
+
+        public async Task<int>  StartSessionFromTemplateAsync(int templateId)
+        {
+            var template =  _context.TrainingTemplates
+                                         .Include(e => e.ExerciseTemplates)
+                                         .FirstOrDefault(t => t.Id == templateId);
+
+            if (template == null) return -1;
+
+          /*  var newSession = new TraningSession
+            {
+                Date = DateTime.Now,
+                TrainingTemplateId = templateId,
+
+
+            }; */
+
+
+
+            return 0;
+        }
+
         public async Task<List<TraningSession>> GetAllSessionAsync()
         {
             return await _context.Sessions

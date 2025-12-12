@@ -72,7 +72,7 @@ namespace Tranee
 
                 try
                 {
-                    // db.Database.EnsureDeleted();
+                     db.Database.EnsureDeleted();
 
                     db.Database.Migrate();
                 }

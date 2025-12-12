@@ -62,7 +62,7 @@ namespace Tranee.viewModels
             Name = "Жим лежачи",
             GroupOfMuscle = "Груди",
             RestBetweenSets = 120, // 2 хвилини
-            TargertSets = 3,       // Увага, тут у тебе одруківка в назві властивості (див. коментар нижче)
+            TargetSets = 3,       // Увага, тут у тебе одруківка в назві властивості (див. коментар нижче)
             TargetReps = 10
         },
         new ExerciseTemplate
@@ -70,7 +70,7 @@ namespace Tranee.viewModels
             Name = "Присідання зі штангою",
             GroupOfMuscle = "Ноги",
             RestBetweenSets = 180, // 3 хвилини
-            TargertSets = 4,
+            TargetSets = 4,
             TargetReps = 8
         },
         new ExerciseTemplate
@@ -78,7 +78,7 @@ namespace Tranee.viewModels
             Name = "Тяга верхнього блоку",
             GroupOfMuscle = "Спина",
             RestBetweenSets = 90,
-            TargertSets = 3,
+            TargetSets = 3,
             TargetReps = 12
         }
     }
