@@ -19,12 +19,12 @@ namespace Tranee.viewModels
 
         public ObservableCollection<TrainingTemplate> Templates { get; set; } = new ObservableCollection<TrainingTemplate>();
 
-        public ICommand AddTestSchema { get; }
+        public ICommand AddTestSchemaCommand { get; }
         public AddNewSchemaViewModel(SchemaService service)
         {
             _SchemaService = service;
 
-            AddTestSchema = new Command(async () => await AddSchema() );
+            AddTestSchemaCommand = new Command(async () => await AddSchema() );
 
             Task.Run(LoadData);
         }
@@ -88,8 +88,12 @@ namespace Tranee.viewModels
             // myService.Add(newTrainingTemplate);
 
 
+
             await _SchemaService.AddTemplateAsync(newTrainingTemplate);
-            await LoadData();
+
+
+           Templates.Add(newTrainingTemplate);
+            
         }
     }
 }
