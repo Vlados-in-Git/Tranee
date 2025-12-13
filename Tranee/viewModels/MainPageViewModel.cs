@@ -67,7 +67,16 @@ namespace Tranee.viewModels
 
             OpenCurrentSchemaPage = new Command(async () => await NavigateToCurrentSchemaPage());
             OpenAnalizePage = new Command(async () => await NavigateToAnalizePage());
-            OpenAddTrainingPage = new Command(async () => await NavigateToAddTrainingPage());
+            // OpenAddTrainingPage = new Command(async () => await NavigateToAddTrainingPage());
+            OpenAddTrainingPage = new Command(async () => await NavigateToHistoryPage());
+        }
+
+
+        public ICommand OpenHistoryPage { get;  }
+
+        private async Task NavigateToHistoryPage()
+        {
+            await _service.NavigateTo<HistoryPage>();
         }
 
         // --- AddTrainingPage ---

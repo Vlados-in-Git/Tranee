@@ -17,6 +17,7 @@ namespace TraneeLibrary
         public DateTime Date { get; set; } // date of training
 
         public int? TrainingTemplateId { get; set; }
+        public TrainingTemplate? TrainingTemplate { get; set; }
 
         public int Quality { get; set; } // TODO: make a structure( from easy to hard), show how hard train was
 

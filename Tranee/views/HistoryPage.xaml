@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:TraneeLibrary;assembly=TraneeLibrary"
+             xmlns:vm="clr-namespace:Tranee.viewModels"
+             x:DataType="vm:HistoryViewModel"
+             x:Class="Tranee.views.HistoryPage"
+             Title="Історія тренувань">
+
+
+    <Grid RowDefinitions="Auto, *">
+
+        <Label Text="Твій прогрес" 
+               FontSize="24" 
+               FontAttributes="Bold" 
+               Margin="20,20,20,10" />
+
+        <CollectionView Grid.Row="1" 
+                        ItemsSource="{Binding HistorySessions}"
+                        Margin="10">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:TraningSession">
+
+                    <Frame Margin="10,8" 
+                           Padding="15" 
+                           CornerRadius="15" 
+                           HasShadow="True" 
+                           BorderColor="Transparent"
+                           BackgroundColor="White">
+
+                        <Grid RowDefinitions="Auto, Auto, Auto" ColumnDefinitions="*, Auto">
+
+                            <Label Grid.Row="0" Grid.Column="0"
+                                   Text="{Binding Date, StringFormat='{0:dd MMMM yyyy}'}"
+                                   FontAttributes="Bold" 
+                                   FontSize="16"
+                                   TextColor="{StaticResource Primary}"/>
+
+                            <Border Grid.Row="0" Grid.Column="1" 
+                                    BackgroundColor="#e8f5e9"
+                                    StrokeShape="RoundRectangle 10"
+                                    Padding="10,2">
+                                <Label Text="{Binding Quality, StringFormat='Оцінка: {0}/10'}" 
+                                       TextColor="Green" 
+                                       FontSize="12"
+                                       FontAttributes="Bold"/>
+                            </Border>
+
+                            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                   Text="{Binding TrainingTemplate.Name, TargetNullValue='Вільне тренування'}"
+                                   FontSize="14"
+                                   TextColor="Gray"
+                                   Margin="0,5,0,10"/>
+
+                            <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                                    Text="Переглянути деталі"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HistoryViewModel}}, Path=OpenDetailsCommand}"
+                                    CommandParameter="{Binding .}"
+                                    BackgroundColor="#f0f0f0"
+                                    TextColor="Black"
+                                    CornerRadius="10"
+                                    HeightRequest="40"
+                                    FontSize="12"/>
+
+                        </Grid>
+                    </Frame>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <CollectionView.EmptyView>
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                    <Label Text="Історія порожня" TextColor="Gray"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+        </CollectionView>
+    </Grid>
+</ContentPage>
