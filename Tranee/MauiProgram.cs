@@ -17,6 +17,7 @@ namespace Tranee
         
         //TODOS: make a analize page with functional
 
+        //TODOS: fix all speiling errors and make sesible names
         //TODOS: Make pretty ui for app with animations, image 
 
         //TODOS: Make API

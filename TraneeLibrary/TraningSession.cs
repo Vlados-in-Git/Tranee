@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Collections.ObjectModel;
 
 namespace TraneeLibrary
 {
@@ -43,7 +44,7 @@ namespace TraneeLibrary
         public TraningSession TraningSession { get; set; } = null!;
 
 
-        public List<Set> Sets { get; set; } = new List<Set>();
+        public ObservableCollection<Set> Sets { get; set; } = new ObservableCollection<Set>();
     }
 
     public class Set // TODO: make Inherit from Exercise

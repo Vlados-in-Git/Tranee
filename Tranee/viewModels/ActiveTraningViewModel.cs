@@ -34,6 +34,28 @@ namespace Tranee.viewModels
             _trainingService = trainingService;
 
             FinishWorkoutCommand = new Command(async () => FinishWorkout());
+
+            AddSetCommand = new Command<Exercise>(async (exercise) => AddSet(exercise));
+        }
+
+
+        public ICommand AddSetCommand { get; }
+
+        private void AddSet(Exercise exercise)
+        {
+            if (exercise == null) return;
+
+            var newSet = new Set
+            {
+                Number = exercise.Sets.Count + 1, // Наступний номер
+                Weight = 0,
+                Reps = 0,
+                ExerciseId = exercise.Id
+            };
+
+            exercise.Sets.Add(newSet);
+
+
         }
 
         public ICommand FinishWorkoutCommand { get; }

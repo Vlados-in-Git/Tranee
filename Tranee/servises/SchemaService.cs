@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TraneeLibrary.Data;
 using TraneeLibrary;
-using Microsoft.EntityFrameworkCore;
+using TraneeLibrary.Data;
 
 namespace Tranee.servises
 {
@@ -46,7 +47,7 @@ namespace Tranee.servises
                     Name = tmpExetcise.Name,
                     GroupOfMuscle = tmpExetcise.GroupOfMuscle,
                     RestBetweenSets = tmpExetcise.RestBetweenSets,
-                    Sets = new List<Set>()
+                    Sets = new ObservableCollection<Set>()
                 };
 
                 for (int i = 0; i < tmpExetcise.TargetSets; i++)
