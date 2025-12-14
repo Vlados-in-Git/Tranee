@@ -23,6 +23,8 @@ namespace Tranee.servises
         {
             return await _context.Sessions 
                 .Include(s => s.TrainingTemplate) 
+                .Include(e => e.Exercises)
+                    .ThenInclude(s => s.Sets)
                 .OrderByDescending(s => s.Date)   
                 .ToListAsync();
         }
