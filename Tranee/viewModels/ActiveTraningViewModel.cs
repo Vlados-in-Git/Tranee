@@ -36,9 +36,32 @@ namespace Tranee.viewModels
             FinishWorkoutCommand = new Command(async () => FinishWorkout());
 
             AddSetCommand = new Command<Exercise>(async (exercise) => AddSet(exercise));
+            EditNoteCommand = new Command<Set>(async (s) => await EditNote(s));
         }
 
+        public ICommand EditNoteCommand { get;  }
 
+        private async Task EditNote(Set set)
+        {
+            if (set == null) return;
+
+            // Відкриваємо системне вікно вводу тексту
+            string result = await Application.Current.MainPage.DisplayPromptAsync(
+                "Нотатка",
+                "Додайте коментар до підходу:",
+                initialValue: set.Note, // Показуємо старий текст, якщо був
+                maxLength: 100,
+                keyboard: Keyboard.Text);
+
+            // Якщо натиснули ОК (result не null), зберігаємо
+            if (result != null)
+            {
+                set.Note = result;
+
+                // Якщо нотатка порожня - можна записати null, щоб приховати Label
+                if (string.IsNullOrWhiteSpace(result)) set.Note = null;
+            }
+        }
         public ICommand AddSetCommand { get; }
 
         private void AddSet(Exercise exercise)

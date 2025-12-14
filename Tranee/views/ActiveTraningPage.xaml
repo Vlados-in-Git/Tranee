@@ -4,6 +4,8 @@
              x:Class="Tranee.views.ActiveTraningPage"
              xmlns:model="clr-namespace:TraneeLibrary;assembly=TraneeLibrary"
              xmlns:vm="clr-namespace:Tranee.viewModels"
+             
+             x:Name="ThisPage"
              x:DataType="vm:ActiveTraningViewModel" 
              Title="Тренування">
 
@@ -44,34 +46,65 @@
                             </Grid>
 
                             <VerticalStackLayout BindableLayout.ItemsSource="{Binding Sets}">
+
+
                                 <BindableLayout.ItemTemplate>
                                     <DataTemplate x:DataType="model:Set">
 
-                                        <Grid ColumnDefinitions="30, *, *, 40" Margin="0,5">
+                                        <Grid RowDefinitions="Auto, Auto" Margin="0,5">
 
-                                            <Label Text="{Binding Number}" 
-                                                   VerticalOptions="Center" 
-                                                   HorizontalOptions="Center"/>
+                                            <Grid Grid.Row="0" ColumnDefinitions="30, *, *, 40, 30">
 
-                                            <Entry Grid.Column="1" 
-                                                   Text="{Binding Weight}" 
-                                                   Keyboard="Numeric" 
-                                                   HorizontalTextAlignment="Center"
-                                                   Placeholder="0"/>
+                                                <Label Grid.Column="0" 
+                   Text="{Binding Number}" 
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Center"
+                   TextColor="Gray"/>
 
-                                            <Entry Grid.Column="2" 
-                                                   Text="{Binding Reps}" 
-                                                   Keyboard="Numeric" 
-                                                   HorizontalTextAlignment="Center"
-                                                   Placeholder="0"/>
+                                                <Border Grid.Column="1" Stroke="#E0E0E0" StrokeShape="RoundRectangle 5" HeightRequest="35" Margin="2">
+                                                    <Entry Text="{Binding Weight}" Keyboard="Numeric" HorizontalTextAlignment="Center" Placeholder="0"/>
+                                                </Border>
 
-                                            <CheckBox Grid.Column="3" 
-                                                      HorizontalOptions="Center"/>
+                                                <Border Grid.Column="2" Stroke="#E0E0E0" StrokeShape="RoundRectangle 5" HeightRequest="35" Margin="2">
+                                                    <Entry Text="{Binding Reps}" Keyboard="Numeric" HorizontalTextAlignment="Center" Placeholder="0"/>
+                                                </Border>
+
+                                                <CheckBox Grid.Column="3" HorizontalOptions="Center"/>
+
+                                                <Button Grid.Column="4"
+                                                        Text="📝"
+                                                        FontSize="16"
+                                                        Padding="0"
+                                                        BackgroundColor="Transparent"
+                                                        TextColor="Gray"
+                                                        HeightRequest="35"
+                                                        WidthRequest="30"
+                                                        Command="{Binding Source={x:Reference ThisPage}, Path=BindingContext.EditNoteCommand}"
+                                                        CommandParameter="{Binding .}" />
+                                                                                </Grid>
+
+                                                                                <Label Grid.Row="1" 
+                                                   Text="{Binding Note, StringFormat='Note: {0}'}"
+                                                   FontSize="12"
+                                                   TextColor="#d32f2f" 
+                                                   FontAttributes="Italic"
+                                                   Margin="40,2,0,5">
+
+                                                <Label.Triggers>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding Note}" Value="{x:Null}">
+                                                        <Setter Property="IsVisible" Value="False"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding Note}" Value="">
+                                                        <Setter Property="IsVisible" Value="False"/>
+                                                    </DataTrigger>
+                                                </Label.Triggers>
+
+                                            </Label>
 
                                         </Grid>
-
                                     </DataTemplate>
                                 </BindableLayout.ItemTemplate>
+
                             </VerticalStackLayout>
 
                             <Button Text="+ Додати підхід" 
