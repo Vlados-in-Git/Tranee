@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Tranee.servises;
+using Tranee.views;
 using TraneeLibrary;
 
 namespace Tranee.viewModels
@@ -26,10 +27,24 @@ namespace Tranee.viewModels
             _trainingService = trainingService;
 
             LoadHistoryCommand = new Command(async () => await LoadData());
+            OpenDetailsCommand = new Command<TraningSession>(async (session) => OpenDetails(session));
         }
 
-        public ICommand LoadHistoryCommand { get; }
 
+
+        public ICommand OpenDetailsCommand { get; }
+
+        private async Task OpenDetails( TraningSession session)
+        {
+            if (session == null) return;
+
+            await Application.Current.MainPage.Navigation.PushAsync(new SessionDetailsPage(this, session) );
+        }
+
+
+
+
+        public ICommand LoadHistoryCommand { get; }
         private async Task LoadData()
         {
             var data = await _trainingService.GetHistoryAsync();

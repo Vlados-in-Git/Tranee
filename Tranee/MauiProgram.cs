@@ -9,11 +9,12 @@ namespace Tranee
 {
     public static class MauiProgram
     {
+        /* Compleated TODOS:
         //TODOS: Make a page for creating Template +++
         //TODOS: all elements not fit in creating Template Page ++
-
-        //TODOS: Make a detailed Templates
-        //TODOS: make to write description when create Exercise in template
+        //TODOS: Make a detailed Templates +++
+        //TODOS: make to write description when create Exercise in template +++ 
+        */
 
         //TODOS: Make a detailed history (like menu in template) when see group  of muscle and data and button to see all information about training
 
