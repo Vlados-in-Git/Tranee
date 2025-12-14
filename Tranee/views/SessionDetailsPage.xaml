@@ -24,6 +24,12 @@
                     <Label Text="{Binding Quality, StringFormat='Оцінка: {0}/10'}" 
                            FontSize="14" TextColor="#2e7d32" FontAttributes="Bold"/>
                 </Border>
+
+                <Label Text="{Binding Note}" 
+                       TextColor="#555" 
+                       FontAttributes="Italic"
+                       VerticalOptions="Center"
+                       IsVisible="{Binding Note, Converter={StaticResource IsNotNullOrEmptyConverter}}"/>
             </HorizontalStackLayout>
         </VerticalStackLayout>
 
@@ -34,25 +40,52 @@
 
                         <Label Grid.Row="0" 
                                Text="{Binding Name}" 
-                               FontSize="16" 
+                               FontSize="18" 
                                FontAttributes="Bold" 
-                               TextColor="Black"
-                               Margin="0,0,0,5"/>
+                               TextColor="{StaticResource Primary}"
+                               Margin="0,0,0,10"/>
 
-                        <CollectionView Grid.Row="1" ItemsSource="{Binding Sets}">
-                            <CollectionView.ItemTemplate>
+                        <VerticalStackLayout Grid.Row="1" BindableLayout.ItemsSource="{Binding Sets}" Spacing="6">
+                            <BindableLayout.ItemTemplate>
                                 <DataTemplate>
-                                    <HorizontalStackLayout Spacing="10" Margin="0,2">
-                                        <Label Text="•" TextColor="Gray"/>
-                                        <Label Text="{Binding Weight, StringFormat='{0} кг'}" FontAttributes="Bold" TextColor="Black"/>
-                                        <Label Text="x" TextColor="Gray"/>
-                                        <Label Text="{Binding Reps, StringFormat='{0} разів'}" TextColor="Black"/>
-                                    </HorizontalStackLayout>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
+                                    <VerticalStackLayout>
 
-                        <BoxView Grid.Row="1" HeightRequest="1" Color="#F0F0F0" VerticalOptions="End" Margin="0,10,0,0"/>
+                                        <HorizontalStackLayout Spacing="10">
+                                            <Label Text="•" TextColor="Gray" FontAttributes="Bold"/>
+
+                                            <Label Text="{Binding Weight, StringFormat='{0} кг'}" 
+                                                   FontAttributes="Bold" 
+                                                   TextColor="Black" 
+                                                   FontSize="16"/>
+
+                                            <Label Text="x" TextColor="Gray" VerticalOptions="Center"/>
+
+                                            <Label Text="{Binding Reps, StringFormat='{0} разів'}" 
+                                                   TextColor="Black" 
+                                                   FontSize="16"/>
+                                        </HorizontalStackLayout>
+
+                                        <Label Text="{Binding Note, StringFormat='Note: {0}'}" 
+                                               FontSize="13" 
+                                               TextColor="#D32F2F" 
+                                               FontAttributes="Italic" 
+                                               Margin="20,0,0,5">
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label" Binding="{Binding Note}" Value="{x:Null}">
+                                                    <Setter Property="IsVisible" Value="False"/>
+                                                </DataTrigger>
+                                                <DataTrigger TargetType="Label" Binding="{Binding Note}" Value="">
+                                                    <Setter Property="IsVisible" Value="False"/>
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+
+                                    </VerticalStackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+
+                        <BoxView Grid.Row="1" HeightRequest="1" Color="#F0F0F0" VerticalOptions="End" Margin="0,15,0,0"/>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
@@ -63,4 +96,4 @@
         </CollectionView>
 
     </Grid>
-</ContentPage> 
+</ContentPage>

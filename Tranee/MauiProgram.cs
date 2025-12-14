@@ -19,7 +19,8 @@ namespace Tranee
         */
 
 
-        //TODOS: Make chance to write notes to sets in ActiveTraining
+        //TODOS: Make chance to write notes to sets in ActiveTraining ++
+
         //TODOS: create a enums for muscle group and quality and change everywhere it used
 
         //TODOS: make a analize page with functional

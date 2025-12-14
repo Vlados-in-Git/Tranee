@@ -25,6 +25,8 @@ namespace Tranee.viewModels
             {
                 _currentSession = value;
                 OnPropertyChanged();
+
+
             }
                
         }
@@ -102,7 +104,13 @@ namespace Tranee.viewModels
         }
         public async Task Initialize(int id)
         {
+
             CurrentSession = await _trainingService.GetSessionByIdAsync(id);
+
+            if (CurrentSession.Quality == 0)
+            {
+                CurrentSession.Quality = 5;
+            }
         }
 
         protected void OnPropertyChanged([CallerMemberName] string name = null)
