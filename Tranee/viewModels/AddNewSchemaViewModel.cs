@@ -32,7 +32,7 @@ namespace Tranee.viewModels
             AddTestSchemaCommand = new Command(async () => await AddSchema() );
             StartTraningByTemplate = new Command<TrainingTemplate>(async (template) => await StartTraning( template ));
 
-            Task.Run(LoadData);
+           
         }
 
         public Command<TrainingTemplate> StartTraningByTemplate { get; }

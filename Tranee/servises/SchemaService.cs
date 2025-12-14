@@ -81,7 +81,7 @@ namespace Tranee.servises
         public async Task AddTemplateAsync(TrainingTemplate template)
         {
             await _context.TrainingTemplates.AddAsync(template);
-            _context.SaveChangesAsync();
+             await _context.SaveChangesAsync();
         }
 
         public async Task DeleteTemplateAsync(TrainingTemplate template)

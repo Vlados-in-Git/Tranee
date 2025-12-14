@@ -36,7 +36,7 @@ namespace Tranee.viewModels
         public ObservableCollection<ExerciseTemplate> AddedExercises { get; set; } = new ObservableCollection<ExerciseTemplate>();
 
        
-        public CreatingTemplatePageViewModel(SchemaService schemaService, AddNewSchemaViewModel addNewSchemaViewModel)
+        public CreatingTemplatePageViewModel(SchemaService schemaService)
         {
             DraftExercise = new ExerciseTemplate();
             
@@ -45,7 +45,7 @@ namespace Tranee.viewModels
 
             AddExerciseToBufferCommand = new Command(async () => AddExercise());
             RemoveExerciseCommand = new Command<ExerciseTemplate>(async (delExercise) => RemoveExercise(delExercise) );  // ??
-            SaveTemplateCommand = new Command(async () => SaveTemplate());
+            SaveTemplateCommand = new Command(async () =>await SaveTemplate());
         }
 
 
@@ -72,29 +72,39 @@ namespace Tranee.viewModels
 
         private async Task SaveTemplate()
         {
-            if (CurrentTemplate.Name == null || CurrentTemplate.RestBetweenSets == null)
+            // 1. Валідація
+            if (string.IsNullOrWhiteSpace(CurrentTemplate.Name))
             {
-                Application.Current.MainPage.DisplayAlert("Стривайте","Заповність всі поля", "OK"); // TODOS: MAKE DisplayAlert()
-
+                await Application.Current.MainPage.DisplayAlert("Увага", "Вкажіть назву тренування", "ОК");
                 return;
             }
 
-
-
-            foreach(ExerciseTemplate ex in AddedExercises)
+            if (AddedExercises.Count == 0)
             {
+                await Application.Current.MainPage.DisplayAlert("Увага", "Додайте хоча б одну вправу", "ОК");
+                return;
+            }
+
+            // 2. Гарантуємо, що список у моделі існує (виправлення пункту 4 з чек-листа)
+            if (CurrentTemplate.ExerciseTemplates == null)
+                CurrentTemplate.ExerciseTemplates = new List<ExerciseTemplate>();
+
+            CurrentTemplate.ExerciseTemplates.Clear(); // про всяк випадок очистимо
+
+            foreach (var ex in AddedExercises)
+            {
+                // Ось цей рядок рятує ситуацію:
+                ex.TrainingTemplate = CurrentTemplate;
+
                 CurrentTemplate.ExerciseTemplates.Add(ex);
             }
 
+            // 4. Зберігаємо
             await _schemaService.AddTemplateAsync(CurrentTemplate);
-
-           
-
             await Application.Current.MainPage.DisplayAlert("Успіх", "Шаблон збережено!", "OK");
 
+            // 5. Виходимо
             await Application.Current.MainPage.Navigation.PopAsync();
-
-
         }
 
 

@@ -23,11 +23,11 @@ namespace Tranee.views
             BindingContext = viewModel;
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 
-            _viewModel.LoadData();
+            await _viewModel.LoadData();
         }
     }
 }

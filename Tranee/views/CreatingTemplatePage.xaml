@@ -8,9 +8,11 @@
         <VerticalStackLayout Grid.Row="0" >
             <Label Text="Назва шаблону:" />
             <Entry Text="{Binding CurrentTemplate.Name}" Placeholder="Введіть назву"  />
+            
+            
 
             <Label Text="Відпочинок між підходами:" />
-            <Entry Text="{Binding CurrentTemplate.RestBetweenSets}" Placeholder="Відочинок між підходами у хв" Keyboard="Numeric"  />
+            <Entry Text="{Binding CurrentTemplate.RestBetweenSets, Converter={StaticResource IntToString}}" Placeholder="Відочинок між підходами у хв" Keyboard="Numeric"  />
 
         </VerticalStackLayout>
 
@@ -58,19 +60,22 @@
                        Text="{Binding DraftExercise.Name}"
                        BackgroundColor="White"/>
 
+                <Label Text="Група м'язів:" />
+                <Entry Text="{Binding DraftExercise.GroupOfMuscle}" Placeholder="Введіть Назву групи мязів яка залучається"  />
+
                 <Entry Placeholder="Кількість підходів" 
                        Keyboard="Numeric"
-                       Text="{Binding DraftExercise.TargetSets}"
+                       Text="{Binding DraftExercise.TargetSets, Converter={StaticResource IntToString}}"
                        BackgroundColor="White"/>
 
                 <Entry Placeholder="Кількість повторів" 
                        Keyboard="Numeric"
-                       Text="{Binding DraftExercise.TargetReps  }"
+                       Text="{Binding DraftExercise.TargetReps, Converter={StaticResource IntToString}  }"
                        BackgroundColor="White"/>
 
                 <BoxView HeightRequest="1" Color="LightGray" Margin="0,5"/>
 
-                <Button Text="Додати в список (+)" 
+                <Button Text="Додати в список " 
                         Command="{Binding AddExerciseToBufferCommand}"
                         CornerRadius="10"/>
 
