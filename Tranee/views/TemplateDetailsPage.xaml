@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tranee.views.TemplateDetailsPage"
+             Title="Деталі тренування"
+             BackgroundColor="White">
+
+    <Grid RowDefinitions="Auto, *, Auto">
+
+        <VerticalStackLayout Grid.Row="0" Padding="20,15" Spacing="5" BackgroundColor="#FAFAFA">
+            <Label Text="{Binding Name}" 
+                   FontSize="22" 
+                   FontAttributes="Bold" 
+                   TextColor="Black"/>
+
+            <Label Text="{Binding Description, TargetNullValue='Опису немає'}" 
+                   FontSize="14" 
+                   TextColor="Gray"/>
+
+            <BoxView HeightRequest="1" Color="#E0E0E0" Margin="0,10,0,0"/>
+
+            <HorizontalStackLayout Spacing="10" Margin="0,10,0,0">
+                <Border Stroke="#E0E0E0" StrokeShape="RoundRectangle 5" Padding="10,5" BackgroundColor="White">
+                    <Label Text="{Binding RestBetweenSets, StringFormat='Відпочинок: {0} сек'}" 
+                           FontSize="12" TextColor="Black"/>
+                </Border>
+                <Border Stroke="#E0E0E0" StrokeShape="RoundRectangle 5" Padding="10,5" BackgroundColor="White">
+                    <Label Text="{Binding ExerciseTemplates.Count, StringFormat='Вправ: {0}'}" 
+                           FontSize="12" TextColor="Black"/>
+                </Border>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+
+        <CollectionView Grid.Row="1" ItemsSource="{Binding ExerciseTemplates}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="20,12" ColumnDefinitions="*, Auto, Auto">
+                        <VerticalStackLayout Grid.Column="0" Spacing="2">
+                            <Label Text="{Binding Name}" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+                            <Label Text="{Binding GroupOfMuscle}" FontSize="13" TextColor="Gray"/>
+                        </VerticalStackLayout>
+
+                        <Label Grid.Column="1" Text="{Binding TargetSets, StringFormat='{}S: {0}'}" 
+                               TextColor="Gray" FontSize="14" VerticalOptions="Center" Margin="10,0"/>
+
+                        <Label Grid.Column="2" Text="{Binding TargetReps, StringFormat='{}R: {0}'}" 
+                               TextColor="Gray" FontSize="14" VerticalOptions="Center" Margin="10,0"/>
+
+                        <BoxView Grid.ColumnSpan="3" HeightRequest="1" Color="#F0F0F0" VerticalOptions="End"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+
+        <Grid Grid.Row="2" Padding="20" BackgroundColor="White">
+            <BoxView HeightRequest="1" Color="#E0E0E0" VerticalOptions="Start" Margin="-20, -20, -20, 20"/>
+
+            <Button Text="Почати це тренування"
+            Clicked="Button_Clicked" 
+            BackgroundColor="#6200EE" 
+            TextColor="White"
+            CornerRadius="10"
+            FontAttributes="Bold"
+            HeightRequest="50"/>
+        </Grid>
+
+    </Grid>
+</ContentPage>

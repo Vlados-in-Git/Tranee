@@ -43,11 +43,15 @@
 
 
 
-                                <Button 
-                                    Text="Деталі" 
+                                <Button Text="Деталі" 
                                     HeightRequest="40"
                                     VerticalOptions="Center"
-                                   />
+                                    BackgroundColor="#F0F0F0" 
+                                    TextColor="Black"
+                                    CornerRadius="10"
+                                    FontSize="12"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AddNewSchemaViewModel}}, Path=OpenDetailsCommand}"
+                                    CommandParameter="{Binding .}"/>
 
                                 <Button
                                     Text="Почати" 

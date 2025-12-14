@@ -31,10 +31,13 @@ namespace Tranee.viewModels
 
             AddTestSchemaCommand = new Command(async () => await AddSchema() );
             StartTraningByTemplate = new Command<TrainingTemplate>(async (template) => await StartTraning( template ));
+            OpenDetailsCommand = new Command<TrainingTemplate>(async (template)  => await OpenDetails(template));
 
-           
+
+
         }
 
+        public ICommand OpenDetailsCommand { get; }
         public Command<TrainingTemplate> StartTraningByTemplate { get; }
 
         private async Task StartTraning(TrainingTemplate template)
@@ -54,6 +57,16 @@ namespace Tranee.viewModels
 
             await Application.Current.MainPage.Navigation.PushAsync(activePage); //push page
 
+        }
+
+        private async Task OpenDetails(TrainingTemplate template)
+        {
+            if (template == null) return;
+
+            // Переходимо на сторінку деталей.
+            // Передаємо туди шаблон (щоб показати дані)
+            // І передаємо 'this' (цю ViewModel), щоб кнопка "Почати" там працювала
+            await Application.Current.MainPage.Navigation.PushAsync(new TemplateDetailsPage(this, template));
         }
 
         public async Task LoadData()
