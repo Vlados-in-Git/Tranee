@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace TraneeLibrary
 {
@@ -48,17 +50,38 @@ namespace TraneeLibrary
         public ObservableCollection<Set> Sets { get; set; } = new ObservableCollection<Set>();
     }
 
-    public class Set // TODO: make Inherit from Exercise
+    public class Set: INotifyPropertyChanged// TODO: make Inherit from Exercise
     {
         public int Id { get; set; }
         public int Number  { get; set; }// it first or second or ... set
         public int Weight  { get; set; }// how match Kg you gain in Set;
         public int Reps    { get; set; }// how many time you gained weight;
         public int Quality { get; set; }// show how hard train was TODO: Make a Quality as particular structure to use once in several calsess
-        public string? Note { get; set; }// A note about this set ( might be null)
+       // A note about this set ( might be null)
+
+        private string? _note;
+        public string? Note
+        {
+            get => _note;
+            set
+            {
+                if (_note != value)
+                {
+                    _note = value;
+                    OnPropertyChanged(); // <--- Повідомляємо UI про зміну!
+                }
+            }
+        }
 
         public int ExerciseId { get; set; }
         public Exercise Exercise { get; set; } = null!;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
     }
 }
