@@ -95,6 +95,9 @@
 	  <MauiXaml Update="views\AnalizePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="views\CreatingTemplatePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="views\CurrentSchemaPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

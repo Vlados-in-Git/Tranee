@@ -14,11 +14,20 @@ namespace Tranee.views
 {
     public partial class CurrentSchemaPage : ContentPage
     {
+        private AddNewSchemaViewModel _viewModel;
+
         public CurrentSchemaPage(AddNewSchemaViewModel viewModel)
         {
             InitializeComponent();
-
+            _viewModel = viewModel;
             BindingContext = viewModel;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            _viewModel.LoadData();
         }
     }
 }

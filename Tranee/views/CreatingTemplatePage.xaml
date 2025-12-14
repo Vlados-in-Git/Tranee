@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tranee.views.CreatingTemplatePage"
+             Title="CreatingTemplatePage">
+
+        <Grid  RowDefinitions="auto, * , auto " Padding="15">
+        <VerticalStackLayout Grid.Row="0" >
+            <Label Text="Назва шаблону:" />
+            <Entry Text="{Binding CurrentTemplate.Name}" Placeholder="Введіть назву"  />
+
+            <Label Text="Відпочинок між підходами:" />
+            <Entry Text="{Binding CurrentTemplate.RestBetweenSets}" Placeholder="Відочинок між підходами у хв" Keyboard="Numeric"  />
+
+        </VerticalStackLayout>
+
+        <CollectionView Grid.Row="1" ItemsSource="{Binding AddedExercises}" >
+
+            <CollectionView.ItemTemplate >
+                <DataTemplate>
+
+                    <Frame Padding="10" Margin="0,5" BorderColor="LightGray">
+
+                        <Grid ColumnDefinitions="*, Auto, Auto">
+
+                            <Label Grid.Column="0" 
+                                   Text="{Binding Name}" 
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center"/>
+
+                            <Label Grid.Column="1" 
+                                   Text="{Binding TargetSets, StringFormat='S: {0}'}" 
+                                   TextColor="Gray"
+                                   Margin="10,0"/>
+
+                            <Label Grid.Column="2" 
+                                   Text="{Binding TargetReps, StringFormat='R: {0}'}" 
+                                   TextColor="Gray"
+                                   Margin="10,0"/>
+
+                        </Grid>
+                    </Frame>
+
+                </DataTemplate>
+                
+            </CollectionView.ItemTemplate>
+                
+            
+        </CollectionView>
+
+        <Frame Grid.Row="2" Padding="15" BackgroundColor="#f0f0f0">
+
+            <VerticalStackLayout Spacing="10">
+
+                <Label Text="Нова вправа:" FontAttributes="Bold" TextColor="Gray"/>
+
+                <Entry Placeholder="Назва вправи (напр. Жим лежачи)" 
+                       Text="{Binding DraftExercise.Name}"
+                       BackgroundColor="White"/>
+
+                <Entry Placeholder="Кількість підходів" 
+                       Keyboard="Numeric"
+                       Text="{Binding DraftExercise.TargetSets}"
+                       BackgroundColor="White"/>
+
+                <Entry Placeholder="Кількість повторів" 
+                       Keyboard="Numeric"
+                       Text="{Binding DraftExercise.TargetReps  }"
+                       BackgroundColor="White"/>
+
+                <BoxView HeightRequest="1" Color="LightGray" Margin="0,5"/>
+
+                <Button Text="Додати в список (+)" 
+                        Command="{Binding AddExerciseToBufferCommand}"
+                        CornerRadius="10"/>
+
+                <Button Text="ЗБЕРЕГТИ ВСЕ" 
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        CornerRadius="10"
+                        HeightRequest="50"
+                        Command="{Binding SaveTemplateCommand}"/>
+
+            </VerticalStackLayout>
+        </Frame>
+
+    </Grid>
+
+</ContentPage>
