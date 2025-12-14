@@ -19,18 +19,20 @@ namespace Tranee.viewModels
         public event PropertyChangedEventHandler PropertyChanged;
         private readonly SchemaService _SchemaService;
         private readonly IServiceProvider _serviceProvider;
+        private readonly NavigationService _navigationService;
         public ObservableCollection<TrainingTemplate> Templates { get; set; } = new ObservableCollection<TrainingTemplate>();
 
         public ICommand AddTestSchemaCommand { get; }
-        public AddNewSchemaViewModel(SchemaService service, IServiceProvider serviceProvider )
+        public AddNewSchemaViewModel(SchemaService service, IServiceProvider serviceProvider, NavigationService navigation)
         {
             _SchemaService = service;
             _serviceProvider = serviceProvider;
+            _navigationService = navigation;
 
             AddTestSchemaCommand = new Command(async () => await AddSchema() );
             StartTraningByTemplate = new Command<TrainingTemplate>(async (template) => await StartTraning( template ));
 
-            Task.Run(LoadData);
+           
         }
 
         public Command<TrainingTemplate> StartTraningByTemplate { get; }
@@ -54,7 +56,7 @@ namespace Tranee.viewModels
 
         }
 
-        private async Task LoadData()
+        public async Task LoadData()
         {
             var data = await _SchemaService.GetAllTrainingTemplatesAsync();
 
@@ -69,8 +71,13 @@ namespace Tranee.viewModels
 
         }
 
+        
         private async Task AddSchema()
         {
+
+
+            await _navigationService.NavigateTo<CreatingTemplatePage>();
+            /*
 
             // Створюємо тестовий об'єкт шаблону тренування
             var newTrainingTemplate = new TrainingTemplate
@@ -117,7 +124,7 @@ namespace Tranee.viewModels
             await _SchemaService.AddTemplateAsync(newTrainingTemplate);
 
 
-           Templates.Add(newTrainingTemplate);
+           Templates.Add(newTrainingTemplate);  */
             
         }
     }

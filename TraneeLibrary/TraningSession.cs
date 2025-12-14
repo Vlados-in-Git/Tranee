@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Collections.ObjectModel;
 
 namespace TraneeLibrary
 {
@@ -16,6 +17,7 @@ namespace TraneeLibrary
         public DateTime Date { get; set; } // date of training
 
         public int? TrainingTemplateId { get; set; }
+        public TrainingTemplate? TrainingTemplate { get; set; }
 
         public int Quality { get; set; } // TODO: make a structure( from easy to hard), show how hard train was
 
@@ -43,7 +45,7 @@ namespace TraneeLibrary
         public TraningSession TraningSession { get; set; } = null!;
 
 
-        public List<Set> Sets { get; set; } = new List<Set>();
+        public ObservableCollection<Set> Sets { get; set; } = new ObservableCollection<Set>();
     }
 
     public class Set // TODO: make Inherit from Exercise

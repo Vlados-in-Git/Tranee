@@ -19,6 +19,21 @@ namespace Tranee.servises
         }
 
 
+        public async Task<List<TraningSession>> GetHistoryAsync()
+        {
+            return await _context.Sessions 
+                .Include(s => s.TrainingTemplate) 
+                .OrderByDescending(s => s.Date)   
+                .ToListAsync();
+        }
+
+        public async Task FinishSessionAsync(TraningSession session)
+        {
+            _context.Sessions.Update(session);
+
+            await _context.SaveChangesAsync();
+
+        }
     
         public async Task<TraningSession> GetSessionByIdAsync(int id)
         {

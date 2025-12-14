@@ -9,6 +9,23 @@ namespace Tranee
 {
     public static class MauiProgram
     {
+        //TODOS: Make a page for creating Template +++
+        //TODOS: all elements not fir in creating Template Page
+        //TODOS: Make a detailed Templates
+        //TODOS: Make a detailed history (like menu in template) when see group  of muscle and data and button to see all information about training
+
+        //TODOS: create a enums for muscle group and quality and change everywhere it used
+
+        //TODOS: make a analize page with functional
+
+        //TODOS: fix all speiling errors and make sesible names
+        //TODOS: Make pretty ui for app with animations, image 
+
+        //TODOS: Make API
+        //TODOS: Make MySql Database
+        //TODOS: Make Authorization
+        //TODOS: Deploy ALL of it On AZURE CLOUD
+
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
@@ -36,6 +53,12 @@ namespace Tranee
             builder.Services.AddTransient<TrainingService>();
             builder.Services.AddTransient<AddTrainingViewModel>();
             builder.Services.AddTransient<AddTrainPage>();
+
+            builder.Services.AddTransient<CreatingTemplatePage>();
+            builder.Services.AddTransient<CreatingTemplatePageViewModel>();
+
+            builder.Services.AddTransient<HistoryViewModel>();
+            builder.Services.AddTransient<HistoryPage>();
 
             builder.Services.AddTransient<ActiveTraningPage>();
             builder.Services.AddTransient<ActiveTraningViewModel>();
