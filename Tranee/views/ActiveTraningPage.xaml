@@ -11,11 +11,39 @@
 
     <Grid RowDefinitions="Auto, *, Auto">
 
-        <VerticalStackLayout Grid.Row="0" Padding="15" BackgroundColor="#f0f0f0">
-            <Label Text="{Binding CurrentSession.Date, StringFormat='{0:dd MMMM yyyy}'}" 
-                   FontSize="18" FontAttributes="Bold" TextColor="Black"/>
-          
-        </VerticalStackLayout>
+        <Grid Grid.Row="0" 
+              ColumnDefinitions="*, Auto" 
+              Padding="15,10" 
+              BackgroundColor="#f0f0f0">
+
+            <DatePicker Grid.Column="0"
+                        Date="{Binding CurrentSession.Date}"
+                        Format="dd MMMM yyyy" 
+                        FontSize="18" 
+                        FontAttributes="Bold" 
+                        TextColor="Black"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"/>
+
+            <Border Grid.Column="1" 
+                    Stroke="#E0E0E0" 
+                    StrokeShape="RoundRectangle 8" 
+                    BackgroundColor="White" 
+                    Padding="8,0"
+                  
+                    VerticalOptions="Center">
+
+                <HorizontalStackLayout Spacing="5" VerticalOptions="Center">
+                    <Label Text="🕒" FontSize="12" VerticalOptions="Center"/>
+                    <TimePicker Time="{Binding SessionTime}"
+                                Format="HH:mm"
+                                TextColor="Black"
+                                FontAttributes="Bold"
+                                VerticalOptions="Center"
+                                />
+                </HorizontalStackLayout>
+            </Border>
+        </Grid>
 
         <CollectionView Grid.Row="1" 
                         ItemsSource="{Binding CurrentSession.Exercises}"
@@ -46,20 +74,15 @@
                             </Grid>
 
                             <VerticalStackLayout BindableLayout.ItemsSource="{Binding Sets}">
-
-
                                 <BindableLayout.ItemTemplate>
                                     <DataTemplate x:DataType="model:Set">
-
                                         <Grid RowDefinitions="Auto, Auto" Margin="0,5">
-
                                             <Grid Grid.Row="0" ColumnDefinitions="30, *, *, 40, 30">
-
                                                 <Label Grid.Column="0" 
-                   Text="{Binding Number}" 
-                   VerticalOptions="Center" 
-                   HorizontalOptions="Center"
-                   TextColor="Gray"/>
+                                                       Text="{Binding Number}" 
+                                                       VerticalOptions="Center" 
+                                                       HorizontalOptions="Center"
+                                                       TextColor="Gray"/>
 
                                                 <Border Grid.Column="1" Stroke="#E0E0E0" StrokeShape="RoundRectangle 5" HeightRequest="35" Margin="2">
                                                     <Entry Text="{Binding Weight}" Keyboard="Numeric" HorizontalTextAlignment="Center" Placeholder="0"/>
@@ -81,15 +104,14 @@
                                                         WidthRequest="30"
                                                         Command="{Binding Source={x:Reference ThisPage}, Path=BindingContext.EditNoteCommand}"
                                                         CommandParameter="{Binding .}" />
-                                                                                </Grid>
+                                            </Grid>
 
-                                                                                <Label Grid.Row="1" 
+                                            <Label Grid.Row="1" 
                                                    Text="{Binding Note, StringFormat='Note: {0}'}"
                                                    FontSize="12"
                                                    TextColor="#d32f2f" 
                                                    FontAttributes="Italic"
                                                    Margin="40,2,0,5">
-
                                                 <Label.Triggers>
                                                     <DataTrigger TargetType="Label" Binding="{Binding Note}" Value="{x:Null}">
                                                         <Setter Property="IsVisible" Value="False"/>
@@ -98,13 +120,10 @@
                                                         <Setter Property="IsVisible" Value="False"/>
                                                     </DataTrigger>
                                                 </Label.Triggers>
-
                                             </Label>
-
                                         </Grid>
                                     </DataTemplate>
                                 </BindableLayout.ItemTemplate>
-
                             </VerticalStackLayout>
 
                             <Button Text="+ Додати підхід" 
@@ -114,58 +133,50 @@
                                     Margin="0,10,0,0"
                                     BackgroundColor="Transparent"
                                     TextColor="Gray"
-
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ActiveTraningViewModel}}, Path=AddSetCommand}"
                                     CommandParameter="{Binding .}"/>
-
-
                         </VerticalStackLayout>
                     </Frame>
-                    
 
                 </DataTemplate>
-                
-                
-                
             </CollectionView.ItemTemplate>
-
-
 
             <CollectionView.EmptyView>
                 <Label Text="Завантаження..." HorizontalOptions="Center" VerticalOptions="Center"/>
             </CollectionView.EmptyView>
 
         </CollectionView>
+
         <VerticalStackLayout Grid.Row="2" Margin="20" Spacing="10">
 
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
                 <Label Text="Складність:" FontSize="16" TextColor="Gray"/>
                 <Label Text="{Binding Source={x:Reference QualitySlider}, Path=Value, StringFormat='{0:F0}'}" 
-                   FontSize="18" 
-                   FontAttributes="Bold" 
-                   TextColor="{StaticResource Primary}"/>
+                       FontSize="18" 
+                       FontAttributes="Bold" 
+                       TextColor="{StaticResource Primary}"/>
                 <Label Text="/ 10" FontSize="16" TextColor="Gray"/>
             </HorizontalStackLayout>
 
             <Slider x:Name="QualitySlider"
-                Minimum="1"
-                Maximum="10"
-                Value="{Binding CurrentSession.Quality}"
-                MinimumTrackColor="{StaticResource Primary}"
-                MaximumTrackColor="LightGray"
-                ThumbColor="{StaticResource Primary}" />
+                    Minimum="1"
+                    Maximum="10"
+                    Value="{Binding CurrentSession.Quality}"
+                    MinimumTrackColor="{StaticResource Primary}"
+                    MaximumTrackColor="LightGray"
+                    ThumbColor="{StaticResource Primary}" />
 
             <Button Text="Завершити тренування"
-                Command="{Binding FinishWorkoutCommand}"
-                Margin="0,10,0,0"
-                HeightRequest="50"
-                CornerRadius="25"
-                BackgroundColor="{StaticResource Primary}"
-                TextColor="White"
-                FontAttributes="Bold"
-                Shadow="{Shadow Brush=Black, Offset='0,5', Opacity=0.2}"/>
+                    Command="{Binding FinishWorkoutCommand}"
+                    Margin="0,10,0,0"
+                    HeightRequest="50"
+                    CornerRadius="25"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    Shadow="{Shadow Brush=Black, Offset='0,5', Opacity=0.2}"/>
 
         </VerticalStackLayout>
 
     </Grid>
-</ContentPage>
+</ContentPage> 

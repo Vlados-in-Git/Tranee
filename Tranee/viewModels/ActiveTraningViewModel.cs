@@ -31,6 +31,7 @@ namespace Tranee.viewModels
                
         }
 
+
         public ActiveTraningViewModel(TrainingService trainingService)
         {
             _trainingService = trainingService;
@@ -83,6 +84,28 @@ namespace Tranee.viewModels
 
         }
 
+        public TimeSpan SessionTime
+        {
+            get
+            {
+                // Якщо сесія є, повертаємо її час, інакше 00:00
+                return CurrentSession?.Date.TimeOfDay ?? TimeSpan.Zero;
+            }
+            set
+            {
+                if (CurrentSession != null)
+                {
+                    // Беремо ТІЛЬКИ дату (обнуляємо час) + додаємо НОВИЙ час
+                    CurrentSession.Date = CurrentSession.Date.Date + value;
+
+                    // Повідомляємо інтерфейс, що час змінився (і дата також, технічно)
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(CurrentSession));
+                }
+            }
+        }
+
+
         public ICommand FinishWorkoutCommand { get; }
 
         private async Task FinishWorkout()
@@ -111,6 +134,8 @@ namespace Tranee.viewModels
             {
                 CurrentSession.Quality = 5;
             }
+
+            OnPropertyChanged(nameof(SessionTime));
         }
 
         protected void OnPropertyChanged([CallerMemberName] string name = null)

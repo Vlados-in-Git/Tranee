@@ -50,7 +50,7 @@
 
                             <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                                    
-                                   Text="{Binding Date, StringFormat='{0:dd MMMM yyyy}'}"
+                                   Text="{Binding Date, StringFormat='{0:dd.MM.yyyy HH:mm}'}"
                                    FontSize="14"
                                    TextColor="Gray"
                                    Margin="0,5,0,10"/>
