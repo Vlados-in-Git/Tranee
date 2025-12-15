@@ -4,6 +4,8 @@ using Tranee.servises;
 using Tranee.viewModels;
 using Tranee.views;
 using TraneeLibrary.Data;
+using SkiaSharp.Views.Maui.Controls.Hosting;
+using LiveChartsCore.SkiaSharpView.Maui;
 
 namespace Tranee
 {
@@ -23,7 +25,10 @@ namespace Tranee
 
         //TODOS: create a enums for muscle group and quality and change everywhere it used
 
+        //TODOS: add ability to change date of todays traning, and show date until minutes
+
         //TODOS: make a analize page with functional
+
 
         //TODOS: fix all speiling errors and make sesible names
         //TODOS: Make pretty ui for app with animations, image 
@@ -38,6 +43,8 @@ namespace Tranee
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseSkiaSharp()
+                .UseLiveCharts()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -66,6 +73,9 @@ namespace Tranee
 
             builder.Services.AddTransient<HistoryViewModel>();
             builder.Services.AddTransient<HistoryPage>();
+
+            builder.Services.AddTransient<AnalyticsPage>();
+            builder.Services.AddTransient<AnalyticsViewModel>();
 
             builder.Services.AddTransient<ActiveTraningPage>();
             builder.Services.AddTransient<ActiveTraningViewModel>();

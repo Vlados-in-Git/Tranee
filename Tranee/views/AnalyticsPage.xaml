@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+             xmlns:vm="clr-namespace:Tranee.viewModels"
+             x:Class="Tranee.views.AnalyticsPage"
+             x:DataType="vm:AnalyticsViewModel"
+             Title="Аналітика">
+
+    <Grid RowDefinitions="Auto, Auto, *">
+
+        <VerticalStackLayout Grid.Row="0" Margin="15,15,15,5" Spacing="5">
+            <Label Text="Оберіть вправу для аналізу:" 
+                   TextColor="Gray" FontSize="12" Margin="5,0"/>
+
+            <Picker Title="Оберіть вправу"
+                    ItemsSource="{Binding ExerciseNames}"
+                    SelectedItem="{Binding SelectedExercise}"
+                    BackgroundColor="#F5F5F5"
+                    TextColor="Black"
+                    TitleColor="Gray"
+                    FontSize="16"
+                    HorizontalTextAlignment="Center">
+            </Picker>
+        </VerticalStackLayout>
+
+        <HorizontalStackLayout Grid.Row="1" 
+                       Spacing="10" 
+                       HorizontalOptions="Center" 
+                       Margin="0,10,0,5">
+
+            <HorizontalStackLayout.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="HeightRequest" Value="35"/>
+                    <Setter Property="Padding" Value="10,0"/>
+                    <Setter Property="CornerRadius" Value="18"/>
+                    <Setter Property="BorderWidth" Value="1"/>
+                    <Setter Property="BorderColor" Value="DodgerBlue"/>
+
+                    <Setter Property="BackgroundColor" Value="Transparent"/>
+                    <Setter Property="TextColor" Value="DodgerBlue"/>
+                </Style>
+            </HorizontalStackLayout.Resources>
+
+            <Button Text="1 міс" Command="{Binding FilterCommand}" CommandParameter="1">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding CurrentFilter}" Value="1">
+                        <Setter Property="BackgroundColor" Value="DodgerBlue"/>
+                        <Setter Property="TextColor" Value="White"/>
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+
+            <Button Text="3 міс" Command="{Binding FilterCommand}" CommandParameter="3">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding CurrentFilter}" Value="3">
+                        <Setter Property="BackgroundColor" Value="DodgerBlue"/>
+                        <Setter Property="TextColor" Value="White"/>
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+
+            <Button Text="6 міс" Command="{Binding FilterCommand}" CommandParameter="6">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding CurrentFilter}" Value="6">
+                        <Setter Property="BackgroundColor" Value="DodgerBlue"/>
+                        <Setter Property="TextColor" Value="White"/>
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+
+            <Button Text="Все" Command="{Binding FilterCommand}" CommandParameter="0">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding CurrentFilter}" Value="0">
+                        <Setter Property="BackgroundColor" Value="DodgerBlue"/>
+                        <Setter Property="TextColor" Value="White"/>
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+
+        </HorizontalStackLayout>    
+
+        <lvc:CartesianChart Grid.Row="2"
+                            Series="{Binding Series}"
+                            XAxes="{Binding XAxes}"
+                            YAxes="{Binding YAxes}" 
+                            ZoomMode="X" 
+                            Margin="10"
+                            TooltipPosition="Top"
+                            TooltipTextSize="14" />
+    </Grid>
+
+</ContentPage>  
