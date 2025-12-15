@@ -66,11 +66,17 @@
                                    TextColor="Gray"
                                    Margin="0,0,0,10"/>
 
-                            <Grid ColumnDefinitions="30, *, *, 40" Margin="0,0,0,5">
+                            <Grid ColumnDefinitions="30, *, *, 60, 20" Margin="0,0,0,5">
                                 <Label Text="№" FontAttributes="Bold" HorizontalOptions="Center"/>
                                 <Label Grid.Column="1" Text="КГ" FontAttributes="Bold" HorizontalOptions="Center"/>
                                 <Label Grid.Column="2" Text="Рази" FontAttributes="Bold" HorizontalOptions="Center"/>
-                                <Label Grid.Column="3" Text="ОК" FontAttributes="Bold" HorizontalOptions="Center"/>
+                                <Label Grid.Column="3" 
+                                       Text="Готово" 
+                                       TextColor="Black" 
+                                       FontSize="12"
+                                       FontAttributes="Bold" 
+                                       HorizontalOptions="Center" 
+                                       VerticalOptions="Center"/>
                             </Grid>
 
                             <VerticalStackLayout BindableLayout.ItemsSource="{Binding Sets}">

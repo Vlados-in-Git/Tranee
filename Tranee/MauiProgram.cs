@@ -16,24 +16,24 @@ namespace Tranee
         //TODOS: all elements not fit in creating Template Page ++
         //TODOS: Make a detailed Templates +++
         //TODOS: make to write description when create Exercise in template +++ 
-         //TODOS: Make a detailed history (like menu in template) when see group  of muscle and data and button to see all information about training ++++
-        
+         //TODOS: Make a detailed history (like menu in template) when see group  of muscle and data and button to see all information about training +++
         //TODOS: Make chance to write notes to sets in ActiveTraining ++
         //TODOS: make a analize page with functional +++
-
+        //TODOS: add ability to change date of todays traning, and show date until minutes +++
          //TODOS: create a enums for muscle group and quality and change everywhere it used
          //TODOS: ADD a posibility to compare 2 graphs
+
+
+          //TODOS: fix all speiling errors and make sesible names
+        //TODOS: Make pretty ui for app with animations, image 
+
         */
 
 
 
 
-        //TODOS: add ability to change date of todays traning, and show date until minutes
 
 
-
-        //TODOS: fix all speiling errors and make sesible names
-        //TODOS: Make pretty ui for app with animations, image 
 
         //TODOS: Make API
         //TODOS: Make MySql Database
