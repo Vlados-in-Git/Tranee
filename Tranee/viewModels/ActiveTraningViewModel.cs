@@ -25,9 +25,12 @@ namespace Tranee.viewModels
             {
                 _currentSession = value;
                 OnPropertyChanged();
+
+
             }
                
         }
+
 
         public ActiveTraningViewModel(TrainingService trainingService)
         {
@@ -36,9 +39,32 @@ namespace Tranee.viewModels
             FinishWorkoutCommand = new Command(async () => FinishWorkout());
 
             AddSetCommand = new Command<Exercise>(async (exercise) => AddSet(exercise));
+            EditNoteCommand = new Command<Set>(async (s) => await EditNote(s));
         }
 
+        public ICommand EditNoteCommand { get;  }
 
+        private async Task EditNote(Set set)
+        {
+            if (set == null) return;
+
+            // Відкриваємо системне вікно вводу тексту
+            string result = await Application.Current.MainPage.DisplayPromptAsync(
+                "Нотатка",
+                "Додайте коментар до підходу:",
+                initialValue: set.Note, // Показуємо старий текст, якщо був
+                maxLength: 100,
+                keyboard: Keyboard.Text);
+
+            // Якщо натиснули ОК (result не null), зберігаємо
+            if (result != null)
+            {
+                set.Note = result;
+
+                // Якщо нотатка порожня - можна записати null, щоб приховати Label
+                if (string.IsNullOrWhiteSpace(result)) set.Note = null;
+            }
+        }
         public ICommand AddSetCommand { get; }
 
         private void AddSet(Exercise exercise)
@@ -57,6 +83,28 @@ namespace Tranee.viewModels
 
 
         }
+
+        public TimeSpan SessionTime
+        {
+            get
+            {
+                // Якщо сесія є, повертаємо її час, інакше 00:00
+                return CurrentSession?.Date.TimeOfDay ?? TimeSpan.Zero;
+            }
+            set
+            {
+                if (CurrentSession != null)
+                {
+                    // Беремо ТІЛЬКИ дату (обнуляємо час) + додаємо НОВИЙ час
+                    CurrentSession.Date = CurrentSession.Date.Date + value;
+
+                    // Повідомляємо інтерфейс, що час змінився (і дата також, технічно)
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(CurrentSession));
+                }
+            }
+        }
+
 
         public ICommand FinishWorkoutCommand { get; }
 
@@ -79,7 +127,15 @@ namespace Tranee.viewModels
         }
         public async Task Initialize(int id)
         {
+
             CurrentSession = await _trainingService.GetSessionByIdAsync(id);
+
+            if (CurrentSession.Quality == 0)
+            {
+                CurrentSession.Quality = 5;
+            }
+
+            OnPropertyChanged(nameof(SessionTime));
         }
 
         protected void OnPropertyChanged([CallerMemberName] string name = null)

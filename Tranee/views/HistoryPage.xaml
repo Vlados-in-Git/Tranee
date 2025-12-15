@@ -32,7 +32,8 @@
                         <Grid RowDefinitions="Auto, Auto, Auto" ColumnDefinitions="*, Auto">
 
                             <Label Grid.Row="0" Grid.Column="0"
-                                   Text="{Binding Date, StringFormat='{0:dd MMMM yyyy}'}"
+                                   Text="{Binding TrainingTemplate.Name, TargetNullValue='Вільне тренування'}"
+                                   
                                    FontAttributes="Bold" 
                                    FontSize="16"
                                    TextColor="{StaticResource Primary}"/>
@@ -48,7 +49,8 @@
                             </Border>
 
                             <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                                   Text="{Binding TrainingTemplate.Name, TargetNullValue='Вільне тренування'}"
+                                   
+                                   Text="{Binding Date, StringFormat='{0:dd.MM.yyyy HH:mm}'}"
                                    FontSize="14"
                                    TextColor="Gray"
                                    Margin="0,5,0,10"/>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tranee.views.SessionDetailsPage"
+             Title="Деталі тренування"
+             BackgroundColor="White">
+
+    <Grid RowDefinitions="Auto, *">
+
+        <VerticalStackLayout Grid.Row="0" Padding="20,15" Spacing="5" BackgroundColor="#FAFAFA">
+            <Label Text="{Binding Date, StringFormat='{0:dd MMMM yyyy}'}" 
+                   FontSize="22" 
+                   FontAttributes="Bold" 
+                   TextColor="Black"/>
+
+            <Label Text="{Binding TrainingTemplate.Name, TargetNullValue='Вільне тренування'}" 
+                   FontSize="16" 
+                   TextColor="Gray"/>
+
+            <BoxView HeightRequest="1" Color="#E0E0E0" Margin="0,10,0,0"/>
+
+            <HorizontalStackLayout Spacing="15" Margin="0,10,0,0">
+                <Border Stroke="#E0E0E0" StrokeShape="RoundRectangle 5" Padding="10,5" BackgroundColor="White">
+                    <Label Text="{Binding Quality, StringFormat='Оцінка: {0}/10'}" 
+                           FontSize="14" TextColor="#2e7d32" FontAttributes="Bold"/>
+                </Border>
+
+                <Label Text="{Binding Note}" 
+                       TextColor="#555" 
+                       FontAttributes="Italic"
+                       VerticalOptions="Center"
+                       IsVisible="{Binding Note, Converter={StaticResource IsNotNullOrEmptyConverter}}"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Exercises}" Margin="0,5">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="20,12" RowDefinitions="Auto, Auto">
+
+                        <Label Grid.Row="0" 
+                               Text="{Binding Name}" 
+                               FontSize="18" 
+                               FontAttributes="Bold" 
+                               TextColor="{StaticResource Primary}"
+                               Margin="0,0,0,10"/>
+
+                        <VerticalStackLayout Grid.Row="1" BindableLayout.ItemsSource="{Binding Sets}" Spacing="6">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <VerticalStackLayout>
+
+                                        <HorizontalStackLayout Spacing="10">
+                                            <Label Text="•" TextColor="Gray" FontAttributes="Bold"/>
+
+                                            <Label Text="{Binding Weight, StringFormat='{0} кг'}" 
+                                                   FontAttributes="Bold" 
+                                                   TextColor="Black" 
+                                                   FontSize="16"/>
+
+                                            <Label Text="x" TextColor="Gray" VerticalOptions="Center"/>
+
+                                            <Label Text="{Binding Reps, StringFormat='{0} разів'}" 
+                                                   TextColor="Black" 
+                                                   FontSize="16"/>
+                                        </HorizontalStackLayout>
+
+                                        <Label Text="{Binding Note, StringFormat='Note: {0}'}" 
+                                               FontSize="13" 
+                                               TextColor="#D32F2F" 
+                                               FontAttributes="Italic" 
+                                               Margin="20,0,0,5">
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label" Binding="{Binding Note}" Value="{x:Null}">
+                                                    <Setter Property="IsVisible" Value="False"/>
+                                                </DataTrigger>
+                                                <DataTrigger TargetType="Label" Binding="{Binding Note}" Value="">
+                                                    <Setter Property="IsVisible" Value="False"/>
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+
+                                    </VerticalStackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+
+                        <BoxView Grid.Row="1" HeightRequest="1" Color="#F0F0F0" VerticalOptions="End" Margin="0,15,0,0"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <CollectionView.EmptyView>
+                <Label Text="Вправ не знайдено" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Gray"/>
+            </CollectionView.EmptyView>
+        </CollectionView>
+
+    </Grid>
+</ContentPage>

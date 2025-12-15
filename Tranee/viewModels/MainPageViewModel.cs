@@ -93,7 +93,7 @@ namespace Tranee.viewModels
         private async Task NavigateToAnalizePage()
         {
             // СТАЛО:
-            await _service.NavigateTo<AnalizePage>();
+            await _service.NavigateTo<AnalyticsPage>();
         }
 
         // --- CurrentSchemaPage ---

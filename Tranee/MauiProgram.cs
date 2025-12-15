@@ -4,22 +4,36 @@ using Tranee.servises;
 using Tranee.viewModels;
 using Tranee.views;
 using TraneeLibrary.Data;
+using SkiaSharp.Views.Maui.Controls.Hosting;
+using LiveChartsCore.SkiaSharpView.Maui;
 
 namespace Tranee
 {
     public static class MauiProgram
     {
+        /* Compleated TODOS:
         //TODOS: Make a page for creating Template +++
-        //TODOS: all elements not fir in creating Template Page
-        //TODOS: Make a detailed Templates
-        //TODOS: Make a detailed history (like menu in template) when see group  of muscle and data and button to see all information about training
+        //TODOS: all elements not fit in creating Template Page ++
+        //TODOS: Make a detailed Templates +++
+        //TODOS: make to write description when create Exercise in template +++ 
+         //TODOS: Make a detailed history (like menu in template) when see group  of muscle and data and button to see all information about training +++
+        //TODOS: Make chance to write notes to sets in ActiveTraining ++
+        //TODOS: make a analize page with functional +++
+        //TODOS: add ability to change date of todays traning, and show date until minutes +++
+         //TODOS: create a enums for muscle group and quality and change everywhere it used
+         //TODOS: ADD a posibility to compare 2 graphs
 
-        //TODOS: create a enums for muscle group and quality and change everywhere it used
 
-        //TODOS: make a analize page with functional
-
-        //TODOS: fix all speiling errors and make sesible names
+          //TODOS: fix all speiling errors and make sesible names
         //TODOS: Make pretty ui for app with animations, image 
+
+        */
+
+
+
+
+
+
 
         //TODOS: Make API
         //TODOS: Make MySql Database
@@ -31,6 +45,8 @@ namespace Tranee
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseSkiaSharp()
+                .UseLiveCharts()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -59,6 +75,9 @@ namespace Tranee
 
             builder.Services.AddTransient<HistoryViewModel>();
             builder.Services.AddTransient<HistoryPage>();
+
+            builder.Services.AddTransient<AnalyticsPage>();
+            builder.Services.AddTransient<AnalyticsViewModel>();
 
             builder.Services.AddTransient<ActiveTraningPage>();
             builder.Services.AddTransient<ActiveTraningViewModel>();
@@ -98,7 +117,7 @@ namespace Tranee
 
                 try
                 {
-                     db.Database.EnsureDeleted();
+                    // db.Database.EnsureDeleted();
 
                     db.Database.Migrate();
                 }

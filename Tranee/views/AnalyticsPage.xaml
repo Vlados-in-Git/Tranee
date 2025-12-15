@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+             xmlns:vm="clr-namespace:Tranee.viewModels"
+             x:Class="Tranee.views.AnalyticsPage"
+             x:DataType="vm:AnalyticsViewModel"
+             Title="Аналітика">
+
+    <Grid RowDefinitions="Auto, Auto, Auto, *">
+
+        <VerticalStackLayout Grid.Row="0" Margin="15,15,15,5" Spacing="5">
+            <Label Text="Оберіть вправу для аналізу:" 
+                   TextColor="Gray" FontSize="12" Margin="5,0"/>
+
+            <Picker Title="Оберіть вправу"
+                    ItemsSource="{Binding ExerciseNames}"
+                    SelectedItem="{Binding SelectedExercise}"
+                    BackgroundColor="#F5F5F5"
+                    TextColor="Black"
+                    TitleColor="Gray"
+                    FontSize="16"
+                    HorizontalTextAlignment="Center">
+            </Picker>
+        </VerticalStackLayout>
+
+        <Border Grid.Row="1"
+                Stroke="LightGray" 
+                StrokeThickness="1" 
+                StrokeShape="RoundRectangle 10"
+                BackgroundColor="#F5F5F5"
+                Margin="15,0,15,10"
+                Padding="0">
+
+            <Picker Title="Оберіть показник"
+         ItemsSource="{Binding ChartMetrics}"
+         SelectedIndex="{Binding SelectedMetricIndex}"
+         HorizontalTextAlignment="Center"
+         TextColor="Black"
+         TitleColor="Gray"
+         FontSize="14"
+         HeightRequest="40"/>
+        </Border>
+
+        <HorizontalStackLayout Grid.Row="2" 
+                               Spacing="10" 
+                               HorizontalOptions="Center" 
+                               Margin="0,0,0,10">
+
+            <HorizontalStackLayout.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="HeightRequest" Value="35"/>
+                    <Setter Property="Padding" Value="10,0"/>
+                    <Setter Property="CornerRadius" Value="18"/>
+                    <Setter Property="BorderWidth" Value="1"/>
+                    <Setter Property="BorderColor" Value="DodgerBlue"/>
+
+                    <Setter Property="BackgroundColor" Value="Transparent"/>
+                    <Setter Property="TextColor" Value="DodgerBlue"/>
+                </Style>
+            </HorizontalStackLayout.Resources>
+
+            <Button Text="1 міс" Command="{Binding FilterCommand}" CommandParameter="1">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding CurrentFilter}" Value="1">
+                        <Setter Property="BackgroundColor" Value="DodgerBlue"/>
+                        <Setter Property="TextColor" Value="White"/>
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+
+            <Button Text="3 міс" Command="{Binding FilterCommand}" CommandParameter="3">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding CurrentFilter}" Value="3">
+                        <Setter Property="BackgroundColor" Value="DodgerBlue"/>
+                        <Setter Property="TextColor" Value="White"/>
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+
+            <Button Text="6 міс" Command="{Binding FilterCommand}" CommandParameter="6">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding CurrentFilter}" Value="6">
+                        <Setter Property="BackgroundColor" Value="DodgerBlue"/>
+                        <Setter Property="TextColor" Value="White"/>
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+
+            <Button Text="Все" Command="{Binding FilterCommand}" CommandParameter="0">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding CurrentFilter}" Value="0">
+                        <Setter Property="BackgroundColor" Value="DodgerBlue"/>
+                        <Setter Property="TextColor" Value="White"/>
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+
+        </HorizontalStackLayout>
+
+        <Grid Grid.Row="3" Margin="10">
+
+            <lvc:CartesianChart Series="{Binding Series}"
+                                XAxes="{Binding XAxes}"
+                                YAxes="{Binding YAxes}" 
+                                ZoomMode="X" 
+                                TooltipPosition="Top"
+                                TooltipTextSize="14"
+                                IsVisible="{Binding IsChartVisible}" />
+
+            <VerticalStackLayout IsVisible="{Binding IsNoDataVisible}"
+                                 VerticalOptions="Center" 
+                                 HorizontalOptions="Center"
+                                 Spacing="10">
+
+                <Label Text="📊" 
+                       FontSize="40" 
+                       HorizontalOptions="Center"/>
+
+                <Label Text="Немає тренувань за цей період"
+                       TextColor="Gray"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"/>
+
+                <Label Text="Спробуйте обрати інший період або вправу"
+                       TextColor="LightGray"
+                       FontSize="12"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+        </Grid>
+    </Grid>
+
+</ContentPage>
