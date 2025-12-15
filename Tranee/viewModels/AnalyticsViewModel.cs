@@ -13,8 +13,6 @@ namespace Tranee.viewModels
     public class AnalyticsViewModel : INotifyPropertyChanged
     {
         private readonly TrainingService _trainingService;
-
-        // Тут ми зберігаємо історію
         private List<ExerciseHistoryItem> _fullHistory = new();
 
         public ObservableCollection<ISeries> Series { get; set; } = new();
@@ -23,6 +21,32 @@ namespace Tranee.viewModels
         public ObservableCollection<string> ExerciseNames { get; set; } = new();
 
         public ICommand FilterCommand { get; private set; }
+
+        public List<string> ChartMetrics { get; } = new List<string>
+        {
+            "Сила (Макс. вага)",       // 0
+            "Об'єм (Тоннаж)",          // 1
+            "1ПМ (Теоретичний)",       // 2
+            "Витривалість (Повтори)"   // 3
+        };
+
+        // ПОВЕРНУЛИ SelectedMetricIndex - це надійніше для Picker
+        private int _selectedMetricIndex = 0;
+        public int SelectedMetricIndex
+        {
+            get => _selectedMetricIndex;
+            set
+            {
+                if (_selectedMetricIndex != value)
+                {
+                    _selectedMetricIndex = value;
+                    OnPropertyChanged();
+
+                    // Перемальовуємо
+                    ApplyFilter(CurrentFilter);
+                }
+            }
+        }
 
         private string _selectedExercise;
         public string SelectedExercise
@@ -61,86 +85,66 @@ namespace Tranee.viewModels
         {
             _trainingService = trainingService;
             FilterCommand = new Command<string>(ApplyFilter);
+
+            // ВАЖЛИВО: Одразу ставимо 0, щоб у Picker з'явився текст "Сила..."
+            SelectedMetricIndex = 0;
+
             LoadExercisesListAsync();
         }
 
         public async void LoadExercisesListAsync()
         {
             var names = await _trainingService.GetUniqueExerciseNamesAsync();
-
             ExerciseNames.Clear();
-            foreach (var name in names)
-            {
-                ExerciseNames.Add(name);
-            }
+            foreach (var name in names) ExerciseNames.Add(name);
 
             if (ExerciseNames.Any())
-            {
                 SelectedExercise = ExerciseNames.First();
-            }
         }
 
         public async void LoadChartAsync(string exerciseName)
         {
             ChartTitle = $"Прогрес: {exerciseName}";
-
-            // 1. Отримуємо дані з сервісу (це список Tuples)
-            var serviceData = await _trainingService.GetExerciseHistoryAsync(exerciseName);
-
-            // 2. Перетворюємо їх у наш клас ExerciseHistoryItem
-            _fullHistory = new List<ExerciseHistoryItem>();
-
-            if (serviceData != null)
-            {
-                foreach (var item in serviceData)
-                {
-                    // item.Date та item.MaxWeight беруться з кортежу, який повертає сервіс
-                    _fullHistory.Add(new ExerciseHistoryItem
-                    {
-                        Date = item.Date,
-                        MaxWeight = item.MaxWeight
-                    });
-                }
-            }
-
-            // 3. За замовчуванням показуємо все ("0")
+            var data = await _trainingService.GetExerciseHistoryAsync(exerciseName);
+            _fullHistory = data ?? new List<ExerciseHistoryItem>();
             ApplyFilter("0");
         }
-
 
         private string _currentFilter = "0";
         public string CurrentFilter
         {
             get => _currentFilter;
-            set
-            {
-                if (_currentFilter != value)
-                {
-                    _currentFilter = value;
-                    OnPropertyChanged();
-                }
-            }
+            set { if (_currentFilter != value) { _currentFilter = value; OnPropertyChanged(); } }
+        }
+
+        private bool _isChartVisible = true;
+        public bool IsChartVisible
+        {
+            get => _isChartVisible;
+            set { if (_isChartVisible != value) { _isChartVisible = value; OnPropertyChanged(); } }
+        }
+
+        private bool _isNoDataVisible = false;
+        public bool IsNoDataVisible
+        {
+            get => _isNoDataVisible;
+            set { if (_isNoDataVisible != value) { _isNoDataVisible = value; OnPropertyChanged(); } }
         }
 
         private void ApplyFilter(string monthsStr)
         {
             if (_fullHistory == null || !_fullHistory.Any())
             {
-                Series.Clear();
-                XAxes.Clear();
+                DrawChart(new List<ExerciseHistoryItem>());
                 return;
             }
 
-            // <-- ВАЖЛИВО: Запам'ятовуємо, який фільтр ми натиснули
             CurrentFilter = monthsStr;
-
             int months = int.Parse(monthsStr);
             List<ExerciseHistoryItem> filteredData;
 
             if (months == 0)
-            {
                 filteredData = _fullHistory.ToList();
-            }
             else
             {
                 var cutoffDate = DateTime.Now.AddMonths(-months);
@@ -156,8 +160,13 @@ namespace Tranee.viewModels
             {
                 Series.Clear();
                 XAxes.Clear();
+                IsChartVisible = false;
+                IsNoDataVisible = true;
                 return;
             }
+
+            IsChartVisible = true;
+            IsNoDataVisible = false;
 
             XAxes.Clear();
             XAxes.Add(new Axis
@@ -167,26 +176,54 @@ namespace Tranee.viewModels
                 TextSize = 12
             });
 
+            List<double> valuesToShow;
+            string seriesName;
+            SKColor lineColor;
+
+            // Використовуємо індекс напряму - це надійніше
+            switch (SelectedMetricIndex)
+            {
+                case 1:
+                    valuesToShow = data.Select(x => x.Volume).ToList();
+                    seriesName = "Об'єм (кг)";
+                    lineColor = SKColors.OrangeRed;
+                    break;
+                case 2:
+                    valuesToShow = data.Select(x => x.OneRepMax).ToList();
+                    seriesName = "1ПМ (кг)";
+                    lineColor = SKColors.Purple;
+                    break;
+                case 3:
+                    valuesToShow = data.Select(x => (double)x.TotalReps).ToList();
+                    seriesName = "Повтори (шт)";
+                    lineColor = SKColors.SeaGreen;
+                    break;
+                case 0:
+                default:
+                    valuesToShow = data.Select(x => x.MaxWeight).ToList();
+                    seriesName = "Максимальна вага";
+                    lineColor = SKColors.DodgerBlue;
+                    break;
+            }
+
             YAxes.Clear();
             YAxes.Add(new Axis
             {
-                Labeler = value => $"{value} кг",
+                Labeler = value => SelectedMetricIndex == 3 ? $"{value:N0}" : $"{value:N0} кг",
                 TextSize = 12
             });
-
-            var mainColor = SKColors.DodgerBlue;
 
             Series.Clear();
             Series.Add(new LineSeries<double>
             {
-                Values = data.Select(x => x.MaxWeight).ToList(),
-                Name = "Максимальна вага",
-                Stroke = new SolidColorPaint(mainColor) { StrokeThickness = 4 },
+                Values = valuesToShow,
+                Name = seriesName,
+                Stroke = new SolidColorPaint(lineColor) { StrokeThickness = 4 },
                 GeometrySize = 12,
-                GeometryStroke = new SolidColorPaint(mainColor) { StrokeThickness = 3 },
-                GeometryFill = new SolidColorPaint(mainColor.WithAlpha(150)),
+                GeometryStroke = new SolidColorPaint(lineColor) { StrokeThickness = 3 },
+                GeometryFill = new SolidColorPaint(lineColor.WithAlpha(150)),
                 LineSmoothness = 0.5,
-                Fill = new SolidColorPaint(mainColor.WithAlpha(50))
+                Fill = new SolidColorPaint(lineColor.WithAlpha(50))
             });
         }
 
@@ -197,10 +234,12 @@ namespace Tranee.viewModels
         }
     }
 
-    // --- ДОДАВ КЛАС, ЯКОГО НЕ ВИСТАЧАЛО ---
     public class ExerciseHistoryItem
     {
         public DateTime Date { get; set; }
         public double MaxWeight { get; set; }
+        public double Volume { get; set; }
+        public double OneRepMax { get; set; }
+        public int TotalReps { get; set; }
     }
 }
