@@ -65,11 +65,48 @@
 ## 📷 Скриншоти
 
 - Головний екран
+  
+<img width="467" height="976" alt="Знімок екрана 2025-12-16 212258" src="https://github.com/user-attachments/assets/d5d54e10-67d0-4d27-ba2a-a3875c3c89c2" />
+
+- Сторінка з шаблонами
+
+<img width="444" height="962" alt="Знімок екрана 2025-12-16 213613" src="https://github.com/user-attachments/assets/34e53f8b-0413-41b1-85e4-647f14cb535d" />
+
+- Деталі шаблону
+
+<img width="441" height="960" alt="Знімок екрана 2025-12-16 213212" src="https://github.com/user-attachments/assets/02556442-edc5-4c2c-9bb2-8029ae924c0d" />
+
+- Історія тренувань
+
+<img width="447" height="964" alt="Знімок екрана 2025-12-16 213134" src="https://github.com/user-attachments/assets/4b6f2fd8-c566-4f5b-892f-551333a4c96c" />
+
+- деталі конкретного тренування
+
+<img width="449" height="952" alt="image" src="https://github.com/user-attachments/assets/15dfc62d-c1dc-46f8-a6ab-37f42aafe992" />
+
+-  Сторінка додавання нових вправ
+
+<img width="446" height="967" alt="Знімок екрана 2025-12-16 213417" src="https://github.com/user-attachments/assets/1966aab4-1fa7-4d25-b666-b6c60decfe34" />
+
+
 
 - Екран активного тренування
-- Форма додавання нових вправ
 
-*(Зображення будуть додані у папку `/screenshots/`)*
+<img width="444" height="961" alt="Знімок екрана 2025-12-16 213523" src="https://github.com/user-attachments/assets/6fb89ff4-b0d9-4c16-a998-c4bd0c01aaa5" />
+
+- Трекінг результатів
+
+<img width="441" height="957" alt="Знімок екрана 2025-12-16 212935" src="https://github.com/user-attachments/assets/e3a3bff3-4a21-4c40-b818-ee58c0e25694" />
+
+<img width="440" height="896" alt="Знімок екрана 2025-12-16 212956" src="https://github.com/user-attachments/assets/f436bf71-46f8-4c78-b8aa-c33f671a751b" />
+
+<img width="444" height="955" alt="Знімок екрана 2025-12-16 213004 – копія" src="https://github.com/user-attachments/assets/4d4a7fd5-4242-41cc-82b8-ea386e6a2d09" />
+
+<img width="439" height="904" alt="Знімок екрана 2025-12-16 212948" src="https://github.com/user-attachments/assets/cb2bfc33-5933-4e45-9890-c2a0088b00c3" />
+
+
+<img width="437" height="959" alt="Знімок екрана 2025-12-16 213031" src="https://github.com/user-attachments/assets/dc87be4b-fb52-4534-bb93-1eada9c4c26e" />
+
 
 ---
 
