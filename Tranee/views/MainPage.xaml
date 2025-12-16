@@ -8,32 +8,28 @@
             Padding="30,0"
             Spacing="25">
 
-            <Label Text="Todays training UI" 
-                   Margin="0,30,0,0"
-                   HorizontalOptions="Center"/>
+           
             
-            <Label Text="data/time" />
-            
-            <Button Text="History"
+            <Button Text="Історія тренувань"
                     Command="{Binding OpenAddTrainingPage}"/>
 
 
 
 
-            <Button Text="Templates" 
-                   Command="{Binding OpenCurrentSchemaPage}"
-                    
-             />
 
-
-            <Button Text="Annalize"
+            <Button Text="Аналіз"
                         Command="{Binding OpenAnalizePage}"
                  Grid.Column="1"
                         Grid.Row="1"/>
-                
-        
 
 
+
+
+
+            <Button Text="Шаблони" 
+                   Command="{Binding OpenCurrentSchemaPage}"
+                    
+             />
 
 
 
