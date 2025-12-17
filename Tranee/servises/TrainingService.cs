@@ -42,7 +42,6 @@ namespace Tranee.servises
                 // Якщо вправа була в цей день і є підходи
                 if (exercise != null && exercise.Sets.Any())
                 {
-                    // --- ТУТ ВЕСЬ НОВИЙ КОД ---
 
                     // 1. Максимальна вага (Сила)
                     double maxWeight = exercise.Sets.Max(s => s.Weight);

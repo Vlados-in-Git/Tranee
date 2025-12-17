@@ -180,7 +180,7 @@ namespace Tranee.viewModels
             string seriesName;
             SKColor lineColor;
 
-            // Використовуємо індекс напряму - це надійніше
+            // boxing?
             switch (SelectedMetricIndex)
             {
                 case 1:
