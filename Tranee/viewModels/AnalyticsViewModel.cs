@@ -30,7 +30,7 @@ namespace Tranee.viewModels
             "Витривалість (Повтори)"   // 3
         };
 
-        // ПОВЕРНУЛИ SelectedMetricIndex - це надійніше для Picker
+       
         private int _selectedMetricIndex = 0;
         public int SelectedMetricIndex
         {
@@ -42,7 +42,7 @@ namespace Tranee.viewModels
                     _selectedMetricIndex = value;
                     OnPropertyChanged();
 
-                    // Перемальовуємо
+                    
                     ApplyFilter(CurrentFilter);
                 }
             }
@@ -86,7 +86,7 @@ namespace Tranee.viewModels
             _trainingService = trainingService;
             FilterCommand = new Command<string>(ApplyFilter);
 
-            // ВАЖЛИВО: Одразу ставимо 0, щоб у Picker з'явився текст "Сила..."
+            
             SelectedMetricIndex = 0;
 
             LoadExercisesListAsync();
@@ -180,7 +180,7 @@ namespace Tranee.viewModels
             string seriesName;
             SKColor lineColor;
 
-            // boxing?
+            
             switch (SelectedMetricIndex)
             {
                 case 1:

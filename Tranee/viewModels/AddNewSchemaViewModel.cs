@@ -44,18 +44,18 @@ namespace Tranee.viewModels
         {
             if (template == null) return;
 
-            int newSessionId = await _SchemaService.StartSessionFromTemplateAsync(template.Id);         //create session in DB
+            int newSessionId = await _SchemaService.StartSessionFromTemplateAsync(template.Id);        
 
             if (newSessionId == -1) return;
 
-            var activePage = _serviceProvider.GetService<ActiveTraningPage>();      //create page
+            var activePage = _serviceProvider.GetService<ActiveTraningPage>();      
 
             if (activePage.BindingContext is ActiveTraningViewModel targetViewModel)
             {
-                await targetViewModel.Initialize(newSessionId); // create data in VM
+                await targetViewModel.Initialize(newSessionId);
             }
 
-            await Application.Current.MainPage.Navigation.PushAsync(activePage); //push page
+            await Application.Current.MainPage.Navigation.PushAsync(activePage); 
 
         }
 
@@ -63,9 +63,7 @@ namespace Tranee.viewModels
         {
             if (template == null) return;
 
-            // Переходимо на сторінку деталей.
-            // Передаємо туди шаблон (щоб показати дані)
-            // І передаємо 'this' (цю ViewModel), щоб кнопка "Почати" там працювала
+           
             await Application.Current.MainPage.Navigation.PushAsync(new TemplateDetailsPage(this, template));
         }
 
@@ -90,54 +88,7 @@ namespace Tranee.viewModels
 
 
             await _navigationService.NavigateTo<CreatingTemplatePage>();
-            /*
-
-            // Створюємо тестовий об'єкт шаблону тренування
-            var newTrainingTemplate = new TrainingTemplate
-            {
-                Name = "Фулбаді для початківців",
-                Description = "Базове тренування на все тіло, акцент на великі групи м'язів",
-                RestBetweenSets = 90, // 1.5 хвилини відпочинку між вправами
-
-                // Додаємо список вправ
-                ExerciseTemplates = new List<ExerciseTemplate>
-    {
-        new ExerciseTemplate
-        {
-            Name = "Жим лежачи",
-            GroupOfMuscle = "Груди",
-            RestBetweenSets = 120, // 2 хвилини
-            TargetSets = 3,       // Увага, тут у тебе одруківка в назві властивості (див. коментар нижче)
-            TargetReps = 10
-        },
-        new ExerciseTemplate
-        {
-            Name = "Присідання зі штангою",
-            GroupOfMuscle = "Ноги",
-            RestBetweenSets = 180, // 3 хвилини
-            TargetSets = 4,
-            TargetReps = 8
-        },
-        new ExerciseTemplate
-        {
-            Name = "Тяга верхнього блоку",
-            GroupOfMuscle = "Спина",
-            RestBetweenSets = 90,
-            TargetSets = 3,
-            TargetReps = 12
-        }
-    }
-            };
-
-            // Тут ти викликаєш свій сервіс, наприклад:
-            // myService.Add(newTrainingTemplate);
-
-
-
-            await _SchemaService.AddTemplateAsync(newTrainingTemplate);
-
-
-           Templates.Add(newTrainingTemplate);  */
+           
             
         }
     }

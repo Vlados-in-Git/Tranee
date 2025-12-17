@@ -13,10 +13,10 @@ namespace Tranee.Converters
         {
             public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
             {
-                // Якщо значення null, повертаємо порожній рядок
+                
                 if (value == null) return string.Empty;
 
-                // Якщо це нуль, теж можна повертати порожній рядок (щоб було красиво)
+               
                 if (value is int intVal && intVal == 0) return string.Empty;
 
                 return value.ToString();
@@ -27,12 +27,12 @@ namespace Tranee.Converters
                 string strValue = value as string;
 
                 if (string.IsNullOrWhiteSpace(strValue))
-                    return 0; // Якщо стерли текст -> повертаємо 0
+                    return 0; 
 
                 if (int.TryParse(strValue, out int result))
-                    return result; // Успішно розпарсили
+                    return result; 
 
-                return 0; // Ввели букви або щось не те -> повертаємо 0
+                return 0;
             }
         }
     

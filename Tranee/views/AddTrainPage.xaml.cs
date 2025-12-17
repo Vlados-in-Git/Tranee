@@ -16,12 +16,7 @@ namespace Tranee.views
 
             BindingContext = viewModel;
 
-          /* 
-            // створив обєкт сервісу навігації, щоб мати доступ до команд, передав аргументом властивість MainPage.Navigation щоб мати доступ до цієї сторінки
-            var trainingService = new TrainingService();
-
-            // через BC створюю обєкт VM і передаю туди Servises, звязуючи V - VM - Service
-            BindingContext = new AddTrainingViewModel(trainingService); */
+         
         }
     }
 }

@@ -10,7 +10,7 @@ namespace TraneeLibrary
     {
         public int Id { get; set; }
 
-        public string Name { get; set; }                    // name of training 
+        public string Name { get; set; }                   
         public int RestBetweenSets { get; set; }
         public string? Description { get; set; }
 

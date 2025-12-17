@@ -10,37 +10,32 @@ using System.Runtime.CompilerServices;
 
 namespace TraneeLibrary
 {
-    //class wich discrabe a traning session in general
+   
     public class TraningSession
     {
 
-        // TODO: To relate a traningSession with TrainingTemplate
+        
         public int Id { get; set; }
-        public DateTime Date { get; set; } // date of training
+        public DateTime Date { get; set; }
 
         public int? TrainingTemplateId { get; set; }
         public TrainingTemplate? TrainingTemplate { get; set; }
 
-        public int Quality { get; set; } // TODO: make a structure( from easy to hard), show how hard train was
+        public int Quality { get; set; } 
 
         public int RestBetweenExercise { get; set; }
 
         public List<Exercise> Exercises { get; set; } = new List<Exercise>();
 
-        // public Exercise 
-        // make a Sets as a new object, so group of similars object will represent a all training
-
 
     }
 
-    public class Exercise // 
+    public class Exercise 
     {
         public int Id { get; set; }
-        public string Name { get; set; } // name of exercise
-        public string GroupOfMuscle { get; set; } // name on wich group of muscle train this exercise TODO: make that group of muscle could be several in one record
-        public int RestBetweenSets { get; set; } // Time of rest between sets
-
-        // make a default weight ( like weight only griph) ?
+        public string Name { get; set; }
+        public string GroupOfMuscle { get; set; } 
+        public int RestBetweenSets { get; set; } 
 
 
         public int TraningSessionId { get; set; }
@@ -50,14 +45,13 @@ namespace TraneeLibrary
         public ObservableCollection<Set> Sets { get; set; } = new ObservableCollection<Set>();
     }
 
-    public class Set: INotifyPropertyChanged// TODO: make Inherit from Exercise
+    public class Set: INotifyPropertyChanged
     {
         public int Id { get; set; }
-        public int Number  { get; set; }// it first or second or ... set
-        public int Weight  { get; set; }// how match Kg you gain in Set;
-        public int Reps    { get; set; }// how many time you gained weight;
-        public int Quality { get; set; }// show how hard train was TODO: Make a Quality as particular structure to use once in several calsess
-       // A note about this set ( might be null)
+        public int Number  { get; set; }
+        public int Weight  { get; set; }
+        public int Reps    { get; set; }
+        public int Quality { get; set; }
 
         private string? _note;
         public string? Note
@@ -68,7 +62,7 @@ namespace TraneeLibrary
                 if (_note != value)
                 {
                     _note = value;
-                    OnPropertyChanged(); // <--- Повідомляємо UI про зміну!
+                    OnPropertyChanged();
                 }
             }
         }
