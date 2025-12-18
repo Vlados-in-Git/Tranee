@@ -12,17 +12,17 @@ namespace TraneeLibrary.Data
     public class LocalDBContext : DbContext
     {
 
-        // TODO: Move a migrations to android upp
+        
 
         public LocalDBContext()
         {
-           // Database.EnsureCreated();
+          
         }
 
         public LocalDBContext(DbContextOptions<LocalDBContext> options)
            : base(options)
         {
-          //  Database.EnsureCreated();
+         
         }
 
 

@@ -11,34 +11,7 @@ namespace Tranee
 {
     public static class MauiProgram
     {
-        /* Compleated TODOS:
-        //TODOS: Make a page for creating Template +++
-        //TODOS: all elements not fit in creating Template Page ++
-        //TODOS: Make a detailed Templates +++
-        //TODOS: make to write description when create Exercise in template +++ 
-         //TODOS: Make a detailed history (like menu in template) when see group  of muscle and data and button to see all information about training +++
-        //TODOS: Make chance to write notes to sets in ActiveTraining ++
-        //TODOS: make a analize page with functional +++
-        //TODOS: add ability to change date of todays traning, and show date until minutes +++
-         //TODOS: create a enums for muscle group and quality and change everywhere it used
-         //TODOS: ADD a posibility to compare 2 graphs
-
-
-          //TODOS: fix all speiling errors and make sesible names
-        //TODOS: Make pretty ui for app with animations, image 
-
-        */
-
-
-
-
-
-
-
-        //TODOS: Make API
-        //TODOS: Make MySql Database
-        //TODOS: Make Authorization
-        //TODOS: Deploy ALL of it On AZURE CLOUD
+       
 
         public static MauiApp CreateMauiApp()
         {
@@ -54,7 +27,7 @@ namespace Tranee
                 });
 
 
-            // "TraneeLocal.db"
+            
 
 
             string dbPath = Path.Combine(FileSystem.AppDataDirectory, "TraneeLocal.db");
@@ -62,10 +35,10 @@ namespace Tranee
             builder.Services.AddDbContext<LocalDBContext>(options =>
             {
                 options.UseSqlite($"Data Source={dbPath}");
-                // Тут НЕ треба вказувати MigrationsAssembly, бо бібліотека підключена напряму
+                
             });
 
-            // Services and viewmodels/pages
+            
             builder.Services.AddTransient<TrainingService>();
             builder.Services.AddTransient<AddTrainingViewModel>();
             builder.Services.AddTransient<AddTrainPage>();
@@ -86,7 +59,7 @@ namespace Tranee
             builder.Services.AddTransient<AddNewSchemaViewModel>();
             builder.Services.AddTransient<CurrentSchemaPage>();
 
-            // Register navigation service, main VM and main page so DI can wire bindings/navigation
+           
             builder.Services.AddSingleton<NavigationService>();
             builder.Services.AddTransient<MainPageViewModel>();
             builder.Services.AddTransient<MainPage>();
@@ -110,22 +83,22 @@ namespace Tranee
 
         private static void InitializeDatabase(MauiApp app)
         {
-            // Створюємо тимчасову область (Scope), щоб дістати DbContext
+           
             using (var scope = app.Services.CreateScope())
             {
                 var db = scope.ServiceProvider.GetRequiredService<LocalDBContext>();
 
                 try
                 {
-                    // db.Database.EnsureDeleted();
+                    
 
                     db.Database.Migrate();
                 }
                 catch (Exception ex)
                 {
-                    // Логування помилки, якщо щось піде не так
+                   
                     Console.WriteLine($"Database migration failed: {ex.Message}");
-                    // Можна додати Debug.WriteLine або App.MainPage.DisplayAlert...
+                    
                 }
             }
 

@@ -48,20 +48,20 @@ namespace Tranee.viewModels
         {
             if (set == null) return;
 
-            // Відкриваємо системне вікно вводу тексту
+            
             string result = await Application.Current.MainPage.DisplayPromptAsync(
                 "Нотатка",
                 "Додайте коментар до підходу:",
-                initialValue: set.Note, // Показуємо старий текст, якщо був
+                initialValue: set.Note, 
                 maxLength: 100,
                 keyboard: Keyboard.Text);
 
-            // Якщо натиснули ОК (result не null), зберігаємо
+            
             if (result != null)
             {
                 set.Note = result;
 
-                // Якщо нотатка порожня - можна записати null, щоб приховати Label
+               
                 if (string.IsNullOrWhiteSpace(result)) set.Note = null;
             }
         }
@@ -73,7 +73,7 @@ namespace Tranee.viewModels
 
             var newSet = new Set
             {
-                Number = exercise.Sets.Count + 1, // Наступний номер
+                Number = exercise.Sets.Count + 1, 
                 Weight = 0,
                 Reps = 0,
                 ExerciseId = exercise.Id
@@ -88,17 +88,16 @@ namespace Tranee.viewModels
         {
             get
             {
-                // Якщо сесія є, повертаємо її час, інакше 00:00
+               
                 return CurrentSession?.Date.TimeOfDay ?? TimeSpan.Zero;
             }
             set
             {
                 if (CurrentSession != null)
                 {
-                    // Беремо ТІЛЬКИ дату (обнуляємо час) + додаємо НОВИЙ час
+                    
                     CurrentSession.Date = CurrentSession.Date.Date + value;
 
-                    // Повідомляємо інтерфейс, що час змінився (і дата також, технічно)
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(CurrentSession));
                 }

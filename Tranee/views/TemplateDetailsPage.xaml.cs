@@ -22,7 +22,7 @@ public partial class TemplateDetailsPage : ContentPage
 
     private void Button_Clicked(object sender, EventArgs e)
     {
-        // Просто викликаємо ту саму команду, що і на головній сторінці
+        
         if (_viewModel.StartTraningByTemplate.CanExecute(_trainingTemplate))
         {
             _viewModel.StartTraningByTemplate.Execute(_trainingTemplate);

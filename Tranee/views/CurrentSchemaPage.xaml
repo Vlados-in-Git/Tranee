@@ -8,7 +8,7 @@
     <Grid RowDefinitions="Auto, Auto, *" Padding="20">
 
         <Button Grid.Row="0" 
-                Text="Додати тестову схему" 
+                Text="Додати  шаблон" 
                 Command="{Binding AddTestSchemaCommand}" 
                 Margin="0,0,0,10"/>
 

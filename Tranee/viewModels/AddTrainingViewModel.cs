@@ -34,12 +34,12 @@ namespace Tranee.viewModels
             _serviceTraining = service;
 
             AddTrainingCommand = new Command(async () => await AddTraining());
-            //LoadDataCommand = new Command(async () => await LoadData());
+            
 
             Task.Run(LoadData);
         }
 
-     //   public ICommand LoadData { get; }
+    
        
 
         private async Task LoadData()
@@ -60,7 +60,7 @@ namespace Tranee.viewModels
         private async Task AddTraining()
         {
 
-            // Create a realistic training session with multiple exercises and sets.
+            
             var session = new TraningSession()
             {
                 Date = DateTime.Now,
@@ -69,7 +69,7 @@ namespace Tranee.viewModels
                 Exercises = new List<Exercise>()
             };
 
-            // Squat exercise with three sets
+           
             var squat = new Exercise
             {
                 Name = "Barbell Back Squat",
@@ -84,7 +84,7 @@ namespace Tranee.viewModels
                 }
             };
 
-        // Bench press exercise with three sets
+       
         var bench = new Exercise
         {
             Name = "Barbell Bench Press",

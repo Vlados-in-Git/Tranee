@@ -56,7 +56,7 @@ namespace Tranee.servises
                     {
                         Number = i + 1,
                         Reps = tmpExetcise.TargetReps,
-                        Weight = 0, // Вага поки 0, юзер впише сам
+                        Weight = 0, 
                        
                     });
                 }
@@ -90,11 +90,6 @@ namespace Tranee.servises
             await _context.SaveChangesAsync();
         }
 
-        //TODO: Make a Upgrade metode that changes concreate object;
        
-        /*public async Task UpdateTemplatesAsync(int id, TrainingTemplate updatedTemplate)
-        {
-            _context.TrainingTemplates.
-        } */
     } 
 }

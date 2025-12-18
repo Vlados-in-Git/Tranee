@@ -85,25 +85,25 @@ namespace Tranee.viewModels
                 return;
             }
 
-            // 2. Гарантуємо, що список у моделі існує (виправлення пункту 4 з чек-листа)
+           
             if (CurrentTemplate.ExerciseTemplates == null)
                 CurrentTemplate.ExerciseTemplates = new List<ExerciseTemplate>();
 
-            CurrentTemplate.ExerciseTemplates.Clear(); // про всяк випадок очистимо
+            CurrentTemplate.ExerciseTemplates.Clear(); 
 
             foreach (var ex in AddedExercises)
             {
-                // Ось цей рядок рятує ситуацію:
+               
                 ex.TrainingTemplate = CurrentTemplate;
 
                 CurrentTemplate.ExerciseTemplates.Add(ex);
             }
 
-            // 4. Зберігаємо
+            
             await _schemaService.AddTemplateAsync(CurrentTemplate);
             await Application.Current.MainPage.DisplayAlert("Успіх", "Шаблон збережено!", "OK");
 
-            // 5. Виходимо
+           
             await Application.Current.MainPage.Navigation.PopAsync();
         }
 
